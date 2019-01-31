@@ -1,3 +1,14 @@
+var config = {
+    apiKey: "AIzaSyCGZZCH_lfY1pys2O1ZWvMLFLU2La9O31I",
+    authDomain: "meteroite-visit.firebaseapp.com",
+    databaseURL: "https://meteroite-visit.firebaseio.com",
+    projectId: "meteroite-visit",
+    storageBucket: "meteroite-visit.appspot.com",
+    messagingSenderId: "368206631752"
+  };
+  firebase.initializeApp(config);
+
+  var database = firebase.database();
 // HOME PAGE //
 
 // Paragraph On - Home
