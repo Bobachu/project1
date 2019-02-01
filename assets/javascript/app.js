@@ -47,7 +47,7 @@
 
 // SAVE SEARCHES //
 
-// Allow users to save their searches in the side navbar (if possible)
+// Allow users to save their searches in the side navbar (if possible on front end)
 // Searches are saved in Firebase....
 
 // Side Navbar toggle off
