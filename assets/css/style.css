@@ -10,3 +10,8 @@
     margin: auto;
     align-content: center;
 }
+
+#map {
+    height: 800px;
+    margin-bottom: 20px;
+  }

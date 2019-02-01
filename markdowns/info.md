@@ -15,7 +15,7 @@
 >API Key: IP2uCeskAQKyGZG9LCQccVqoQbZSCqmzUli7mNl6
 
 [Google Maps](https://developers.google.com/maps/documentation/)
->API Key not needed
+>API Key: AIzaSyC-wb21LCS9dEviENM9iBh99us7E2K4ZI4
 
 ## Task Assignments
 

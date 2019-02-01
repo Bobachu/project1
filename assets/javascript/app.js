@@ -5,10 +5,30 @@ var config = {
     projectId: "meteroite-visit",
     storageBucket: "meteroite-visit.appspot.com",
     messagingSenderId: "368206631752"
-  };
-  firebase.initializeApp(config);
+};
+firebase.initializeApp(config);
 
-  var database = firebase.database();
+var database = firebase.database();
+
+// Initialize and show map in HTML
+var marker;
+
+function initMap() {
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 13,
+        center: { lat: 59.325, lng: 18.070 }
+    });
+
+    marker = new google.maps.Marker({
+        map: map,
+        draggable: false,
+        animation: google.maps.Animation.DROP,
+        position: { lat: 59.327, lng: 18.067 }
+    });
+    marker.addListener('click', toggleBounce);
+}
+
+
 // HOME PAGE //
 
 // Paragraph On - Home
