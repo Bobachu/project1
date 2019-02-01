@@ -5,7 +5,7 @@
 
 ----
 
-![Web Deisgn](./assets/web_layout_sketch.png)
+![Web Deisgn](./assets/imgs/web_layout_sketch.png)
 
 **Project Title:** Meteorite Visit
 
