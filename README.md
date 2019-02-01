@@ -1,6 +1,8 @@
 ## Project One
 ### Project Due 02/07/19
 
+## [Live Website](https://bobachu.github.io/project1/)
+
 ----
 
 ![Web Deisgn](./assets/web_layout_sketch.png)
@@ -18,9 +20,10 @@
 **API's to Use:**
 
 [NASA | Meteorite Landings](https://data.nasa.gov/Space-Science/Meteorite-Landings/gh4g-9sfh)
->API Key: IP2uCeskAQKyGZG9LCQccVqoQbZSCqmzUli7mNl6
+> API Key: IP2uCeskAQKyGZG9LCQccVqoQbZSCqmzUli7mNl6
 
 [Google Maps](https://developers.google.com/maps/documentation/)
+> API Key: _**Needed**_
     
     Leaflet and Bing can be alts
 

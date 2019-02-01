@@ -2,6 +2,22 @@
 
 > **Understand API's being used**
 
+### MVP (Minimal Viable Project)
+ >1. Who is your target audience?
+ >> * People who want to know where/when meteorites have fell
+ >
+ >2. What is the problem that the product will address?
+ >> * Curiousity
+ >
+ >3. What is the primary goal of the product?
+ >> * Show where/when meteorites fell
+ >
+ >4. Identify and prioritize essential user stories (limit this to 3 or fewer)?
+ >> *
+ >> *
+ >> *
+
+
 ## Google Maps
 
 > Understand how to intergrate search
@@ -22,7 +38,7 @@
 ## Back-End
 > Basic click functions
 > 
-> Link javascript to dummy .html page for testing
+> Link javascript .html page for testing
     >> console.log
 
 ----
