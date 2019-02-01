@@ -20,7 +20,9 @@
 **API's to Use:**
 
 [NASA | Meteorite Landings](https://data.nasa.gov/Space-Science/Meteorite-Landings/gh4g-9sfh)
-> API Key: IP2uCeskAQKyGZG9LCQccVqoQbZSCqmzUli7mNl6
+>  API Key: IP2uCeskAQKyGZG9LCQccVqoQbZSCqmzUli7mNl6
+>
+> APP Token: uPRgN0kLB8vEkkQsOGe7M2weG
 
 [Google Maps](https://developers.google.com/maps/documentation/)
 > API Key: _**Needed**_
