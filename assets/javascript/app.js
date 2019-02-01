@@ -56,17 +56,19 @@ function initMap() {
 // Meteorites that are nearby will have their information toggled on pins on Google Maps
 // ------------- If not the information will be populated in a container beneath the search bar & map
 
-// $.ajax({
-//     url: "https://data.nasa.gov/resource/y77d-th95.json",
-//     type: "GET",
-//     data: {
-//       "$limit" : 5000,
-//       "$$app_token" : "IP2uCeskAQKyGZG9LCQccVqoQbZSCqmzUli7mNl6"
-//     }
-// }).done(function(data) {
-//   alert("Retrieved " + data.length + " records from the dataset!");
-//   console.log(data);
-// });
+var nasaURL = "https://data.nasa.gov/resource/y77d-th95.json";
+
+$.ajax({
+  url: nasaURL,
+  type: "GET",
+  data: {
+    "$limit" : 5000,
+    "$$app_token" : "uPRgN0kLB8vEkkQsOGe7M2weG"
+  }
+}).done(function(data) {
+alert("Retrieved " + data.length + " records from the dataset!");
+console.log(data);
+});
 
 // 1. Type of Meteorite Data
 
