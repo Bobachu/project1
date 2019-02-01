@@ -1,6 +1,8 @@
 ## Project One
 ### Project Due 02/07/19
 
+## [Live Website](https://bobachu.github.io/project1/)
+
 ----
 
 ![Web Deisgn](./assets/web_layout_sketch.png)

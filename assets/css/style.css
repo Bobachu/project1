@@ -1,0 +1,12 @@
+#openParagraph {
+    font-size: 15pt;
+    background-color: lightblue;
+    margin: auto;
+    text-align: center;
+    padding: 20px;
+}
+
+#inputBlock {
+    margin: auto;
+    align-content: center;
+}
