@@ -51,24 +51,43 @@ function initMap() {
 
 // SEARCH RESULTS //
 
-// Meterorite Landings within 'x' mile radius of the 'lag/long' or 'geolocation' of the place/address.
+////  DATA
+var nasaURL = "https://data.nasa.gov/resource/y77d-th95.json?";
 
-// Meteorites that are nearby will have their information toggled on pins on Google Maps
-// ------------- If not the information will be populated in a container beneath the search bar & map
+var name;
+// https://data.nasa.gov/resource/y77d-th95.json?name='Aachen'
 
-var nasaURL = "https://data.nasa.gov/resource/y77d-th95.json";
+var mass;
+// https://data.nasa.gov/resource/y77d-th95.json?mass='16'
+
+var long;
+// https://data.nasa.gov/resource/y77d-th95.json?reclong=
+
+var lat;
+//  https://data.nasa.gov/resource/y77d-th95.json?reclat=
+
+
+var year;
+// Format for year, '1880' is the only value changing
+// '1880'-01-01T00:00:00.000
+// https://data.nasa.gov/resource/y77d-th95.json?year='2006'-01-01T00:00:00.000
 
 $.ajax({
   url: nasaURL,
   type: "GET",
   data: {
     "$limit" : 5000,
-    "$$app_token" : "uPRgN0kLB8vEkkQsOGe7M2weG"
+    "$$app_token" : "uPRgN0kLB8vEkkQsOGe7M2weG",
   }
-}).done(function(data) {
-alert("Retrieved " + data.length + " records from the dataset!");
+}).then(function(data) {
 console.log(data);
 });
+// // // // // // // // // // // // //
+
+// Meterorite Landings within 'x' mile radius of the 'lag/long' or 'geolocation' of the place/address.
+
+// Meteorites that are nearby will have their information toggled on pins on Google Maps
+// ------------- If not the information will be populated in a container beneath the search bar & map
 
 // 1. Type of Meteorite Data
 
