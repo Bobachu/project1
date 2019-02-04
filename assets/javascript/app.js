@@ -34,17 +34,17 @@ function initMap() {
 
         
     });
-    
+
     $("#submit").on("click", function (event) {
         event.preventDefault();
         console.log("Click works");
-        var searchBtn = $("#locationInput").val();
+        var searchBtn = $("#locationInput").val()/*.trim*/;
+        // trim is not working
         searchBtns();
         $("#locationInput").val("");
     
-        
-        
-    });
+});
+
     function searchBtns(){
         var userLoc = "";
         userLoc.push(searchBtn);
