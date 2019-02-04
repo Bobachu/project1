@@ -1,5 +1,5 @@
 // $(document).ready(function (){
-    // searchBtns();
+ 
 
 var config = {
     apiKey: "AIzaSyCGZZCH_lfY1pys2O1ZWvMLFLU2La9O31I",
@@ -35,23 +35,33 @@ function initMap() {
 
         
     });
+//if name of buttons changes, please update in code!
 
-    $("#submit").on("click", function (event) {
+    $("#searchButton").on("click", function (event) {
         event.preventDefault();
         console.log("Click works");
         // .trim is not working. ??
-        var searchBtn = $("#locationInput").val()/*.trim*/;
+        var searchBtn = $("#searchText").val()/*.trim*/;
         searchBtns();
-        $("#locationInput").val("");
-    
-});
-//still working on functionality. 
-    function searchBtns(){
+        $("#searchText").val("");
+
+        function searchBtns(){
         
-        var userLoc = "";
-        var userLocal = localStorage.setItem("search", searchBtn);
-        userLoc.push(userLocal);
-    }
+            var userLoc = " ";
+            var userLocal = localStorage.setItem("search", searchBtn);
+            //throwing an error w/searchBtn.push. Code works but is throwing error. Working on resolving error. 
+            
+            searchBtn.push(userLocal);
+        }
+    
+})
+//still working on functionality. 
+    // function searchBtns(userLoc){
+        
+    //     var userLoc = " ";
+    //     var userLocal = localStorage.setItem("search", searchBtn);
+    //     searchBtn.push(userLocal);
+    // }
 
     // marker = new google.maps.Marker({
     //     map: map,
