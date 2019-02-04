@@ -1,3 +1,6 @@
+$(document).ready(function (){
+    searchBtns();
+
 var config = {
     apiKey: "AIzaSyCGZZCH_lfY1pys2O1ZWvMLFLU2La9O31I",
     authDomain: "meteroite-visit.firebaseapp.com",
@@ -28,7 +31,24 @@ function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 12,
         center: { lat: -33.92, lng: 151.25 }
+
+        
     });
+    
+    $("#submit").on("click", function (event) {
+        event.preventDefault();
+        console.log("Click works");
+        var searchBtn = $("#locationInput").val();
+        searchBtns();
+        $("#locationInput").val("");
+    
+        
+        
+    });
+    function searchBtns(){
+        var userLoc = "";
+        userLoc.push(searchBtn);
+    }
 
     marker = new google.maps.Marker({
         map: map,
@@ -75,10 +95,8 @@ function initMap() {
 // User types in the name of a place that they would like to pull up, or an address.
 
 // User clicks on the search button
-$("#submit").on("click", function () {
-    console.log("Click works");
-    
-});
+
+
 //
 // ======================================
 //
@@ -132,3 +150,4 @@ $.ajax({
 // Side Navbar toggle off
 
 // Side Navbar toggle on
+});
