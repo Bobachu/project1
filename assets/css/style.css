@@ -1,9 +1,21 @@
-#openParagraph {
+body {
+    background-image: url("../imgs/bg2.gif");
+    background-repeat: repeat;
+}
+
+.container {
     font-size: 15pt;
-    background-color: lightblue;
+    background-color: rgb(62, 49, 126);
+    margin: auto;
+    padding: 10px;
+}
+
+p {
+    font-size: 15pt;
+    background-color: rgb(219, 219, 219);
     margin: auto;
     text-align: center;
-    padding: 20px;
+    padding: 15px;
 }
 
 #inputBlock {

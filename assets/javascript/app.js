@@ -97,7 +97,13 @@ function geocodeAddress(geocoder, resultsMap) {
 
 // Paragraph On - Home
 
+
 // Paragraph Off - After Searching
+
+// $("p").toggle(1000, function()){
+//     console.log("toggle paragraph");
+// }
+
 
 //
 // ======================================
@@ -107,8 +113,12 @@ function geocodeAddress(geocoder, resultsMap) {
 
 // User types in the name of a place that they would like to pull up, or an address.
 
+
 // User clicks on the search button
 
+
+// var searchResult = $("#searchText").val();
+// Here we grab the text from the input box
 
 //
 // ======================================
@@ -116,10 +126,16 @@ function geocodeAddress(geocoder, resultsMap) {
 
 // SEARCH RESULTS //
 
-// Meterorite Landings within 'x' mile radius of the 'lag/long' or 'geolocation' of the place/address.
+////  DATA
+var nasaURL = "https://data.nasa.gov/resource/y77d-th95.json?";
 
-// Meteorites that are nearby will have their information toggled on pins on Google Maps
-// ------------- If not the information will be populated in a container beneath the search bar & map
+var name = "https://data.nasa.gov/resource/y77d-th95.json?name=";
+
+var mass = "https://data.nasa.gov/resource/y77d-th95.json?mass=";
+
+var long = "https://data.nasa.gov/resource/y77d-th95.json?reclong=";
+
+var lat = "https://data.nasa.gov/resource/y77d-th95.json?reclat=";
 
 var nasaURL = "https://data.nasa.gov/resource/y77d-th95.json";
 
@@ -127,19 +143,37 @@ $.ajax({
     url: nasaURL,
     type: "GET",
     data: {
-        "$limit": 5000,
-        "$$app_token": "uPRgN0kLB8vEkkQsOGe7M2weG"
+      "$limit" : 5000,
+      "$$app_token" : "IP2uCeskAQKyGZG9LCQccVqoQbZSCqmzUli7mNl6"
     }
-}).done(function (data) {
-    alert("Retrieved " + data.length + " records from the dataset!");
-    console.log(data);
-});
+})
 
-// 1. Type of Meteorite Data
+.then(function(response) {
+    $("#searchResults").text(JSON.stringify(response));
+
+    $(".name").html("Name: " + name);
+    $(".yearFell").html("Meteor Fell: " + year);
+    $(".mass").html("Mass (in grams): " + mass);
+
+    console.log("Lat: " + lat);
+    console.log("Long: " + long);
+  });
+  
+// // // // // // // // // // // // //
+
+// Meterorite Landings within 'x' mile radius of the 'lag/long' or 'geolocation' of the place/address.
+
+// Meteorites that are nearby will have their information toggled on pins on Google Maps
+// ------------- If not the information will be populated in a container beneath the search bar & map
+
+// 1. Name of Meteorite
+
 
 // 2. Year fell Data
 
+
 // 3. Mass Data
+
 
 //
 // ======================================
