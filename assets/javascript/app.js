@@ -1,5 +1,5 @@
-$(document).ready(function (){
-    searchBtns();
+// $(document).ready(function (){
+    // searchBtns();
 
 var config = {
     apiKey: "AIzaSyCGZZCH_lfY1pys2O1ZWvMLFLU2La9O31I",
@@ -14,7 +14,7 @@ firebase.initializeApp(config);
 var database = firebase.database();
 
 // initial variables
-var userLoc = "";
+// var userLoc = "Seattle, WA";
 var meteoriteLoc = [
     ['Bondi Beach', -33.890542, 151.274856, 4],
     ['Coogee Beach', -33.923036, 151.259052, 5],
@@ -25,9 +25,10 @@ var meteoriteLoc = [
 
 
 // Initialize and show map in HTML
-var marker;
+// var marker;
 
 function initMap() {
+    var geocoder = new google.maps.Geocoder();
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 12,
         center: { lat: -33.92, lng: 151.25 }
@@ -50,12 +51,12 @@ function initMap() {
         userLoc.push(searchBtn);
     }
 
-    marker = new google.maps.Marker({
-        map: map,
-        draggable: false,
-        animation: google.maps.Animation.DROP,
-        position: { lat: -33.92, lng: 151.25 }
-    });
+    // marker = new google.maps.Marker({
+    //     map: map,
+    //     draggable: false,
+    //     animation: google.maps.Animation.DROP,
+    //     position: { lat: -33.92, lng: 151.25 }
+    // });
 
     var infowindow = new google.maps.InfoWindow();
 
@@ -78,8 +79,20 @@ function initMap() {
 
 }
 
-
-
+function geocodeAddress(geocoder, resultsMap) {
+    var address = userLoc;
+    geocoder.geocode({'address': address}, function(results, status) {
+      if (status === 'OK') {
+        resultsMap.setCenter(results[0].geometry.location);
+        var marker = new google.maps.Marker({
+          map: resultsMap,
+          position: results[0].geometry.location
+        });
+      } else {
+        alert('Geocode was not successful for the following reason: ' + status);
+      }
+    });
+  }
 // HOME PAGE //
 
 // Paragraph On - Home
@@ -184,4 +197,4 @@ $.ajax({
 // Side Navbar toggle off
 
 // Side Navbar toggle on
-});
+// });
