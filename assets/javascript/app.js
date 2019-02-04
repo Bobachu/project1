@@ -26,14 +26,17 @@ var database = firebase.database();
 
 // initial variables
 // var userLoc = "Seattle, WA";
-var meteoriteLoc = [
-    ['Bondi Beach', -33.890542, 151.274856, 4],
-    ['Coogee Beach', -33.923036, 151.259052, 5],
-    ['Cronulla Beach', -34.028249, 151.157507, 3],
-    ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
-    ['Maroubra Beach', -33.950198, 151.259302, 1]
-];
+var meteoriteLoc = [$.ajax({
+    url: nasaURL,
+    type: "GET",
+    data: {
+        "$limit": 5000,
+        "$$app_token": "uPRgN0kLB8vEkkQsOGe7M2weG"
+    }
+}).done(function(data) {
 
+    console.log(data);
+  })];
 
 // Initialize and show map in HTML
 // var marker;
@@ -141,32 +144,27 @@ function geocodeAddress(geocoder, resultsMap) {
 //
 
 // SEARCH RESULTS //
-$.ajax({
-    url: nasaURL,
-    type: "GET",
-    data: {
-        "$limit": 5000,
-        "$$app_token": "uPRgN0kLB8vEkkQsOGe7M2weG"
-    }
-})
 
-    .then(function (response) {
-        $("#searchResults").text(JSON.stringify(response));
 
-        // Meteorites that are nearby will have their information toggled on pins on Google Maps
-        // ------------- If not the information will be populated in a container beneath the search bar & map
-        // 1. Name of Meteorite
-        $(".name").html("Name: " + name);
-        // 2. Year fell Data
-        $(".yearFell").html("Meteor Fell: " + year);
+    // .then(function (response) {
+    //     $("#searchResults").text(JSON.stringify(response));
 
-        // 3. Mass Data
-        $(".mass").html("Mass (in grams): " + mass);
+    //     // Meteorites that are nearby will have their information toggled on pins on Google Maps
+    //     // ------------- If not the information will be populated in a container beneath the search bar & map
 
-        // Meterorite Landings within 'x' mile radius of the 'lag/long' or 'geolocation' of the place/address.
-        console.log("Lat: " + lat);
-        console.log("Long: " + long);
-    });
+    //     // 1. Name of Meteorite
+    //     $(".name").html("Name: " + name);
+
+    //     // 2. Year fell Data
+    //     $(".yearFell").html("Meteor Fell: " + year);
+
+    //     // 3. Mass Data
+    //     $(".mass").html("Mass (in grams): " + mass);
+
+    //     // Meterorite Landings within 'x' mile radius of the 'lag/long' or 'geolocation' of the place/address.
+    //     console.log("Lat: " + lat);
+    //     console.log("Long: " + long);
+    // });
 
 //
 // ======================================
