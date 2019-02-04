@@ -144,7 +144,7 @@ $.ajax({
         console.log("Lat: " + lat);
         console.log("Long: " + long);
     });
-console.log(response);
+
 // // // // // // // // // // // // //
 
 // Meterorite Landings within 'x' mile radius of the 'lag/long' or 'geolocation' of the place/address.
