@@ -11,7 +11,7 @@ firebase.initializeApp(config);
 var database = firebase.database();
 
 // initial variables
-
+var userLoc = "";
 var meteoriteLoc = [
     ['Bondi Beach', -33.890542, 151.274856, 4],
     ['Coogee Beach', -33.923036, 151.259052, 5],
@@ -75,9 +75,10 @@ function initMap() {
 // User types in the name of a place that they would like to pull up, or an address.
 
 // User clicks on the search button
-$("#submit").on("click", function(){
- console.log("Click works");
-
+$("#submit").on("click", function () {
+    console.log("Click works");
+    userLoc = $("#locationInput").val().trim();
+    
 });
 //
 // ======================================
