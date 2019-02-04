@@ -77,7 +77,6 @@ function initMap() {
 // User clicks on the search button
 $("#submit").on("click", function () {
     console.log("Click works");
-    userLoc = $("#locationInput").val().trim();
     
 });
 //
