@@ -1,6 +1,3 @@
-// $(document).ready(function (){
- 
-
 var config = {
     apiKey: "AIzaSyCGZZCH_lfY1pys2O1ZWvMLFLU2La9O31I",
     authDomain: "meteroite-visit.firebaseapp.com",
@@ -33,35 +30,33 @@ function initMap() {
         zoom: 12,
         center: { lat: -33.92, lng: 151.25 }
 
-        
-    });
-//if name of buttons changes, please update in code!
 
+    });
+
+
+    /*if name of buttons changes, please update in code!*/
+
+    
     $("#searchButton").on("click", function (event) {
         event.preventDefault();
         console.log("Click works");
-        // .trim is not working. ??
         var searchBtn = $("#searchText").val()/*.trim*/;
-        searchBtns();
+        var userLocal = localStorage.setItem("search", searchBtn);
+        searchBtn.push(userLocal);
         $("#searchText").val("");
 
-        function searchBtns(){
-        
-            var userLoc = " ";
-            var userLocal = localStorage.setItem("search", searchBtn);
-            //throwing an error w/searchBtn.push. Code works but is throwing error. Working on resolving error. 
-            
-            searchBtn.push(userLocal);
-        }
+    });
+
+    /* creating function to push user location information into array object 
     
-})
-//still working on functionality. 
-    // function searchBtns(userLoc){
-        
-    //     var userLoc = " ";
-    //     var userLocal = localStorage.setItem("search", searchBtn);
-    //     searchBtn.push(userLocal);
-    // }
+    function searchLoc(userLoc){
+   
+       var userLoc = " ";
+       var userLocal = localStorage.setItem("search", searchBtn);
+       searchBtn.push(userLocal);
+       
+    }*/
+
 
     // marker = new google.maps.Marker({
     //     map: map,
@@ -93,18 +88,18 @@ function initMap() {
 
 function geocodeAddress(geocoder, resultsMap) {
     var address = userLoc;
-    geocoder.geocode({'address': address}, function(results, status) {
-      if (status === 'OK') {
-        resultsMap.setCenter(results[0].geometry.location);
-        var marker = new google.maps.Marker({
-          map: resultsMap,
-          position: results[0].geometry.location
-        });
-      } else {
-        alert('Geocode was not successful for the following reason: ' + status);
-      }
+    geocoder.geocode({ 'address': address }, function (results, status) {
+        if (status === 'OK') {
+            resultsMap.setCenter(results[0].geometry.location);
+            var marker = new google.maps.Marker({
+                map: resultsMap,
+                position: results[0].geometry.location
+            });
+        } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+        }
     });
-  }
+}
 // HOME PAGE //
 
 // Paragraph On - Home
@@ -155,22 +150,22 @@ $.ajax({
     url: nasaURL,
     type: "GET",
     data: {
-      "$limit" : 5000,
-      "$$app_token" : "IP2uCeskAQKyGZG9LCQccVqoQbZSCqmzUli7mNl6"
+        "$limit": 5000,
+        "$$app_token": "IP2uCeskAQKyGZG9LCQccVqoQbZSCqmzUli7mNl6"
     }
 })
 
-.then(function(response) {
-    $("#searchResults").text(JSON.stringify(response));
+    .then(function (response) {
+        $("#searchResults").text(JSON.stringify(response));
 
-    $(".name").html("Name: " + name);
-    $(".yearFell").html("Meteor Fell: " + year);
-    $(".mass").html("Mass (in grams): " + mass);
+        $(".name").html("Name: " + name);
+        $(".yearFell").html("Meteor Fell: " + year);
+        $(".mass").html("Mass (in grams): " + mass);
 
-    console.log("Lat: " + lat);
-    console.log("Long: " + long);
-  });
-  
+        console.log("Lat: " + lat);
+        console.log("Long: " + long);
+    });
+
 // // // // // // // // // // // // //
 
 // Meterorite Landings within 'x' mile radius of the 'lag/long' or 'geolocation' of the place/address.
