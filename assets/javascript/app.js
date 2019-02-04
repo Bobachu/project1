@@ -48,7 +48,10 @@ function initMap() {
 // User types in the name of a place that they would like to pull up, or an address.
 
 // User clicks on the search button
+$("#submit").on("click", function(){
+ console.log("Click works");
 
+});
 //
 // ======================================
 //
