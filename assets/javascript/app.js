@@ -1,5 +1,5 @@
-$(document).ready(function (){
-    searchBtns();
+// $(document).ready(function (){
+    // searchBtns();
 
 var config = {
     apiKey: "AIzaSyCGZZCH_lfY1pys2O1ZWvMLFLU2La9O31I",
@@ -14,7 +14,7 @@ firebase.initializeApp(config);
 var database = firebase.database();
 
 // initial variables
-var userLoc = "";
+// var userLoc = "Seattle, WA";
 var meteoriteLoc = [
     ['Bondi Beach', -33.890542, 151.274856, 4],
     ['Coogee Beach', -33.923036, 151.259052, 5],
@@ -25,9 +25,10 @@ var meteoriteLoc = [
 
 
 // Initialize and show map in HTML
-var marker;
+// var marker;
 
 function initMap() {
+    var geocoder = new google.maps.Geocoder();
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 12,
         center: { lat: -33.92, lng: 151.25 }
@@ -50,12 +51,12 @@ function initMap() {
         userLoc.push(searchBtn);
     }
 
-    marker = new google.maps.Marker({
-        map: map,
-        draggable: false,
-        animation: google.maps.Animation.DROP,
-        position: { lat: -33.92, lng: 151.25 }
-    });
+    // marker = new google.maps.Marker({
+    //     map: map,
+    //     draggable: false,
+    //     animation: google.maps.Animation.DROP,
+    //     position: { lat: -33.92, lng: 151.25 }
+    // });
 
     var infowindow = new google.maps.InfoWindow();
 
@@ -78,13 +79,31 @@ function initMap() {
 
 }
 
-
-
+function geocodeAddress(geocoder, resultsMap) {
+    var address = userLoc;
+    geocoder.geocode({'address': address}, function(results, status) {
+      if (status === 'OK') {
+        resultsMap.setCenter(results[0].geometry.location);
+        var marker = new google.maps.Marker({
+          map: resultsMap,
+          position: results[0].geometry.location
+        });
+      } else {
+        alert('Geocode was not successful for the following reason: ' + status);
+      }
+    });
+  }
 // HOME PAGE //
 
 // Paragraph On - Home
 
+
 // Paragraph Off - After Searching
+
+// $("p").toggle(1000, function()){
+//     console.log("toggle paragraph");
+// }
+
 
 //
 // ======================================
@@ -94,8 +113,12 @@ function initMap() {
 
 // User types in the name of a place that they would like to pull up, or an address.
 
+
 // User clicks on the search button
 
+
+// var searchResult = $("#searchText").val();
+// Here we grab the text from the input box
 
 //
 // ======================================
@@ -103,10 +126,16 @@ function initMap() {
 
 // SEARCH RESULTS //
 
-// Meterorite Landings within 'x' mile radius of the 'lag/long' or 'geolocation' of the place/address.
+////  DATA
+var nasaURL = "https://data.nasa.gov/resource/y77d-th95.json?";
 
-// Meteorites that are nearby will have their information toggled on pins on Google Maps
-// ------------- If not the information will be populated in a container beneath the search bar & map
+var name = "https://data.nasa.gov/resource/y77d-th95.json?name=";
+
+var mass = "https://data.nasa.gov/resource/y77d-th95.json?mass=";
+
+var long = "https://data.nasa.gov/resource/y77d-th95.json?reclong=";
+
+var lat = "https://data.nasa.gov/resource/y77d-th95.json?reclat=";
 
 var nasaURL = "https://data.nasa.gov/resource/y77d-th95.json";
 
@@ -114,19 +143,37 @@ $.ajax({
     url: nasaURL,
     type: "GET",
     data: {
-        "$limit": 5000,
-        "$$app_token": "uPRgN0kLB8vEkkQsOGe7M2weG"
+      "$limit" : 5000,
+      "$$app_token" : "IP2uCeskAQKyGZG9LCQccVqoQbZSCqmzUli7mNl6"
     }
-}).done(function (data) {
-    alert("Retrieved " + data.length + " records from the dataset!");
-    console.log(data);
-});
+})
 
-// 1. Type of Meteorite Data
+.then(function(response) {
+    $("#searchResults").text(JSON.stringify(response));
+
+    $(".name").html("Name: " + name);
+    $(".yearFell").html("Meteor Fell: " + year);
+    $(".mass").html("Mass (in grams): " + mass);
+
+    console.log("Lat: " + lat);
+    console.log("Long: " + long);
+  });
+  
+// // // // // // // // // // // // //
+
+// Meterorite Landings within 'x' mile radius of the 'lag/long' or 'geolocation' of the place/address.
+
+// Meteorites that are nearby will have their information toggled on pins on Google Maps
+// ------------- If not the information will be populated in a container beneath the search bar & map
+
+// 1. Name of Meteorite
+
 
 // 2. Year fell Data
 
+
 // 3. Mass Data
+
 
 //
 // ======================================
@@ -150,4 +197,4 @@ $.ajax({
 // Side Navbar toggle off
 
 // Side Navbar toggle on
-});
+// });
