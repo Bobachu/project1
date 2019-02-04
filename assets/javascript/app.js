@@ -33,17 +33,23 @@ function initMap() {
 
     });
 
-
-    /*if name of buttons changes, please update in code!*/
-
+    //Initial Values
+    var userLoc = " ";
     
+    
+
     $("#searchButton").on("click", function (event) {
         event.preventDefault();
         console.log("Click works");
-        var searchBtn = $("#searchText").val()/*.trim*/;
-        var userLocal = localStorage.setItem("search", searchBtn);
-        searchBtn.push(userLocal);
-        $("#searchText").val("");
+        userLoc = $("#searchText").val().trim();
+        console.log(userLoc);
+        
+       
+
+        database.ref().push({
+            location: userLoc,
+            dateAdded: firebase.database.ServerValue.TIMESTAMP
+        });
 
     });
 
