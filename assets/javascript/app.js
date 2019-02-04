@@ -1,5 +1,5 @@
-$(document).ready(function (){
-    searchBtns();
+// $(document).ready(function (){
+    // searchBtns();
 
 var config = {
     apiKey: "AIzaSyCGZZCH_lfY1pys2O1ZWvMLFLU2La9O31I",
@@ -14,7 +14,7 @@ firebase.initializeApp(config);
 var database = firebase.database();
 
 // initial variables
-var userLoc = "Seattle, WA";
+// var userLoc = "Seattle, WA";
 var meteoriteLoc = [
     ['Bondi Beach', -33.890542, 151.274856, 4],
     ['Coogee Beach', -33.923036, 151.259052, 5],
@@ -25,10 +25,10 @@ var meteoriteLoc = [
 
 
 // Initialize and show map in HTML
-var marker;
+// var marker;
 
 function initMap() {
-    geocoder = new google.maps.Geocoder();
+    var geocoder = new google.maps.Geocoder();
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 12,
         center: { lat: -33.92, lng: 151.25 }
@@ -163,4 +163,4 @@ $.ajax({
 // Side Navbar toggle off
 
 // Side Navbar toggle on
-});
+// });
