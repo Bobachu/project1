@@ -39,16 +39,18 @@ function initMap() {
     $("#submit").on("click", function (event) {
         event.preventDefault();
         console.log("Click works");
+        // .trim is not working. ??
         var searchBtn = $("#locationInput").val()/*.trim*/;
-        // trim is not working
         searchBtns();
         $("#locationInput").val("");
     
 });
-
+//still working on functionality. 
     function searchBtns(){
+        
         var userLoc = "";
-        userLoc.push(searchBtn);
+        var userLocal = localStorage.setItem("search", searchBtn);
+        userLoc.push(userLocal);
     }
 
     // marker = new google.maps.Marker({
