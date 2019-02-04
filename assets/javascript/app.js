@@ -137,14 +137,12 @@ var long = "https://data.nasa.gov/resource/y77d-th95.json?reclong=";
 
 var lat = "https://data.nasa.gov/resource/y77d-th95.json?reclat=";
 
-var nasaURL = "https://data.nasa.gov/resource/y77d-th95.json";
-
 $.ajax({
     url: nasaURL,
     type: "GET",
     data: {
       "$limit" : 5000,
-      "$$app_token" : "IP2uCeskAQKyGZG9LCQccVqoQbZSCqmzUli7mNl6"
+      "$$app_token" : "uPRgN0kLB8vEkkQsOGe7M2weG"
     }
 })
 

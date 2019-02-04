@@ -1,6 +1,7 @@
 body {
     background-image: url("../imgs/bg2.gif");
     background-repeat: repeat;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .container {
@@ -10,12 +11,23 @@ body {
     padding: 10px;
 }
 
-p {
+p, .row {
     font-size: 15pt;
     background-color: rgb(219, 219, 219);
     margin: auto;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+h1 {
+    background-color: rgb(62, 49, 126);
+    color: rgb(219, 219, 219);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 60pt;
     text-align: center;
+    margin: auto;
     padding: 15px;
+    border-radius: 10px;
 }
 
 #inputBlock {
@@ -24,6 +36,7 @@ p {
 }
 
 #map {
-    height: 800px;
+    height: 400px;
     margin-bottom: 20px;
+    margin-top: 15px;
   }
