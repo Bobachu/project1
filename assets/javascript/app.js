@@ -1,3 +1,6 @@
+$(document).ready(function (){
+    searchBtns();
+
 var config = {
     apiKey: "AIzaSyCGZZCH_lfY1pys2O1ZWvMLFLU2La9O31I",
     authDomain: "meteroite-visit.firebaseapp.com",
@@ -10,23 +13,71 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 
+// initial variables
+var userLoc = "";
+var meteoriteLoc = [
+    ['Bondi Beach', -33.890542, 151.274856, 4],
+    ['Coogee Beach', -33.923036, 151.259052, 5],
+    ['Cronulla Beach', -34.028249, 151.157507, 3],
+    ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
+    ['Maroubra Beach', -33.950198, 151.259302, 1]
+];
+
+
 // Initialize and show map in HTML
 var marker;
 
 function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 13,
-        center: { lat: 59.325, lng: 18.070 }
+        zoom: 12,
+        center: { lat: -33.92, lng: 151.25 }
+
+        
     });
+    
+    $("#submit").on("click", function (event) {
+        event.preventDefault();
+        console.log("Click works");
+        var searchBtn = $("#locationInput").val();
+        searchBtns();
+        $("#locationInput").val("");
+    
+        
+        
+    });
+    function searchBtns(){
+        var userLoc = "";
+        userLoc.push(searchBtn);
+    }
 
     marker = new google.maps.Marker({
         map: map,
         draggable: false,
         animation: google.maps.Animation.DROP,
-        position: { lat: 59.327, lng: 18.067 }
+        position: { lat: -33.92, lng: 151.25 }
     });
-    marker.addListener('click', toggleBounce);
+
+    var infowindow = new google.maps.InfoWindow();
+
+    var marker, i;
+
+    for (i = 0; i < meteoriteLoc.length; i++) {
+        marker = new google.maps.Marker({
+            position: new google.maps.LatLng(meteoriteLoc[i][1], meteoriteLoc[i][2]),
+            map: map,
+            animation: google.maps.Animation.DROP,
+        });
+
+        google.maps.event.addListener(marker, 'click', (function (marker, i) {
+            return function () {
+                infowindow.setContent(meteoriteLoc[i][0]);
+                infowindow.open(map, marker);
+            }
+        })(marker, i));
+    }
+
 }
+
 
 
 // HOME PAGE //
@@ -73,10 +124,7 @@ var long = "https://data.nasa.gov/resource/y77d-th95.json?reclong=";
 
 var lat = "https://data.nasa.gov/resource/y77d-th95.json?reclat=";
 
-var year;
-// Format for year, '1880' is the only value changing
-// '1880'-01-01T00:00:00.000
-// https://data.nasa.gov/resource/y77d-th95.json?year='2006'-01-01T00:00:00.000
+var nasaURL = "https://data.nasa.gov/resource/y77d-th95.json";
 
 $.ajax({
     url: nasaURL,
@@ -97,6 +145,7 @@ $.ajax({
     console.log("Lat: " + lat);
     console.log("Long: " + long);
   });
+  
 // // // // // // // // // // // // //
 
 // Meterorite Landings within 'x' mile radius of the 'lag/long' or 'geolocation' of the place/address.
@@ -135,3 +184,4 @@ $.ajax({
 // Side Navbar toggle off
 
 // Side Navbar toggle on
+});
