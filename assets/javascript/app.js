@@ -36,6 +36,11 @@ function initMap() {
 
 // Paragraph Off - After Searching
 
+// $("p").toggle(1000, function()){
+//     console.log("toggle paragraph");
+// }
+
+
 //
 // ======================================
 //
@@ -68,7 +73,6 @@ var long = "https://data.nasa.gov/resource/y77d-th95.json?reclong=";
 
 var lat = "https://data.nasa.gov/resource/y77d-th95.json?reclat=";
 
-
 var year;
 // Format for year, '1880' is the only value changing
 // '1880'-01-01T00:00:00.000
@@ -81,8 +85,17 @@ $.ajax({
       "$limit" : 5000,
       "$$app_token" : "IP2uCeskAQKyGZG9LCQccVqoQbZSCqmzUli7mNl6"
     }
-}).then(function(response) {
+})
+
+.then(function(response) {
     $("#searchResults").text(JSON.stringify(response));
+
+    $(".name").html("Name: " + name);
+    $(".yearFell").html("Meteor Fell: " + year);
+    $(".mass").html("Mass (in grams): " + mass);
+
+    console.log("Lat: " + lat);
+    console.log("Long: " + long);
   });
 // // // // // // // // // // // // //
 
@@ -91,7 +104,7 @@ $.ajax({
 // Meteorites that are nearby will have their information toggled on pins on Google Maps
 // ------------- If not the information will be populated in a container beneath the search bar & map
 
-// 1. Type of Meteorite Data
+// 1. Name of Meteorite
 
 
 // 2. Year fell Data
