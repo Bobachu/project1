@@ -11,7 +11,14 @@ firebase.initializeApp(config);
 var database = firebase.database();
 
 // initial variables
-var meteoriteLoc = [];
+
+var meteoriteLoc = [
+    ['Bondi Beach', -33.890542, 151.274856, 4],
+    ['Coogee Beach', -33.923036, 151.259052, 5],
+    ['Cronulla Beach', -34.028249, 151.157507, 3],
+    ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
+    ['Maroubra Beach', -33.950198, 151.259302, 1]
+];
 
 
 // Initialize and show map in HTML
@@ -19,16 +26,36 @@ var marker;
 
 function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 13,
-        center: { lat: 59.325, lng: 18.070 }
+        zoom: 12,
+        center: { lat: -33.92, lng: 151.25 }
     });
 
     marker = new google.maps.Marker({
         map: map,
         draggable: false,
         animation: google.maps.Animation.DROP,
-        position: { lat: 59.327, lng: 18.067 }
+        position: { lat: -33.92, lng: 151.25 }
     });
+
+    var infowindow = new google.maps.InfoWindow();
+
+    var marker, i;
+
+    for (i = 0; i < meteoriteLoc.length; i++) {
+        marker = new google.maps.Marker({
+            position: new google.maps.LatLng(meteoriteLoc[i][1], meteoriteLoc[i][2]),
+            map: map,
+            animation: google.maps.Animation.DROP,
+        });
+
+        google.maps.event.addListener(marker, 'click', (function (marker, i) {
+            return function () {
+                infowindow.setContent(meteoriteLoc[i][0]);
+                infowindow.open(map, marker);
+            }
+        })(marker, i));
+    }
+
 }
 
 
@@ -66,15 +93,15 @@ $("#submit").on("click", function(){
 var nasaURL = "https://data.nasa.gov/resource/y77d-th95.json";
 
 $.ajax({
-  url: nasaURL,
-  type: "GET",
-  data: {
-    "$limit" : 5000,
-    "$$app_token" : "uPRgN0kLB8vEkkQsOGe7M2weG"
-  }
-}).done(function(data) {
-alert("Retrieved " + data.length + " records from the dataset!");
-console.log(data);
+    url: nasaURL,
+    type: "GET",
+    data: {
+        "$limit": 5000,
+        "$$app_token": "uPRgN0kLB8vEkkQsOGe7M2weG"
+    }
+}).done(function (data) {
+    alert("Retrieved " + data.length + " records from the dataset!");
+    console.log(data);
 });
 
 // 1. Type of Meteorite Data
