@@ -33,6 +33,7 @@ function initMap() {
 
 // Paragraph On - Home
 
+
 // Paragraph Off - After Searching
 
 //
@@ -43,7 +44,12 @@ function initMap() {
 
 // User types in the name of a place that they would like to pull up, or an address.
 
+
 // User clicks on the search button
+
+
+// var searchResult = $("#searchText").val();
+// Here we grab the text from the input box
 
 //
 // ======================================
@@ -54,17 +60,13 @@ function initMap() {
 ////  DATA
 var nasaURL = "https://data.nasa.gov/resource/y77d-th95.json?";
 
-var name;
-// https://data.nasa.gov/resource/y77d-th95.json?name='Aachen'
+var name = "https://data.nasa.gov/resource/y77d-th95.json?name=";
 
-var mass;
-// https://data.nasa.gov/resource/y77d-th95.json?mass='16'
+var mass = "https://data.nasa.gov/resource/y77d-th95.json?mass=";
 
-var long;
-// https://data.nasa.gov/resource/y77d-th95.json?reclong=
+var long = "https://data.nasa.gov/resource/y77d-th95.json?reclong=";
 
-var lat;
-//  https://data.nasa.gov/resource/y77d-th95.json?reclat=
+var lat = "https://data.nasa.gov/resource/y77d-th95.json?reclat=";
 
 
 var year;
@@ -73,15 +75,15 @@ var year;
 // https://data.nasa.gov/resource/y77d-th95.json?year='2006'-01-01T00:00:00.000
 
 $.ajax({
-  url: nasaURL,
-  type: "GET",
-  data: {
-    "$limit" : 5000,
-    "$$app_token" : "uPRgN0kLB8vEkkQsOGe7M2weG",
-  }
-}).then(function(data) {
-console.log(data);
-});
+    url: nasaURL,
+    type: "GET",
+    data: {
+      "$limit" : 5000,
+      "$$app_token" : "IP2uCeskAQKyGZG9LCQccVqoQbZSCqmzUli7mNl6"
+    }
+}).then(function(response) {
+    $("#searchResults").text(JSON.stringify(response));
+  });
 // // // // // // // // // // // // //
 
 // Meterorite Landings within 'x' mile radius of the 'lag/long' or 'geolocation' of the place/address.
@@ -91,9 +93,12 @@ console.log(data);
 
 // 1. Type of Meteorite Data
 
+
 // 2. Year fell Data
 
+
 // 3. Mass Data
+
 
 //
 // ======================================
