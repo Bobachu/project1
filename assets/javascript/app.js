@@ -53,15 +53,7 @@ function initMap() {
 
     });
 
-    /* creating function to push user location information into array object 
     
-    function searchLoc(userLoc){
-   
-       var userLoc = " ";
-       var userLocal = localStorage.setItem("search", searchBtn);
-       searchBtn.push(userLocal);
-       
-    }*/
 
 
     // marker = new google.maps.Marker({
