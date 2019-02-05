@@ -18,8 +18,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC-wb21LCS9dEviENM9iBh99us7E2K4ZI4&callback=initMap"
-        async defer></script>
+    
 
     <link rel='icon' href='favi.png' type='image/x-icon'>
 </head>
@@ -67,10 +66,11 @@
 
 
         <div id="map" class="col s8"></div>
-        <table>
+
+        <table class="col s12 striped responsive">
             <thead>
               <tr>
-                  <th>Name</th>
+                  <th>Location</th>
                   <th>Item Name</th>
                   <th>Item Price</th>
               </tr>
@@ -96,9 +96,11 @@
           </table>
         <!-- table goes here under the map -->
     </div>
+    
 
     <script src="assets/javascript/app.js"></script>
-
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC-wb21LCS9dEviENM9iBh99us7E2K4ZI4&callback=initMap"
+    async defer></script>
 
 
 </body>
