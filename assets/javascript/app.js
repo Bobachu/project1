@@ -38,6 +38,8 @@ function initMap() {
         geocodeAddress(geocoder, map);
         $("#searchText").val("");
 
+        
+
 
         var timeDate = firebase.database.ServerValue.TIMESTAMP
         var timeConv = moment(timeDate).format("MM/DD/YYYY");
