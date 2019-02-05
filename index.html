@@ -5,7 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<<<<<<< HEAD
     <title>Fallen Meteorites</title>
+=======
+    <title>Meteorite Visit</title>
+>>>>>>> bf34f4f97d5dbc3cdf9b40aff134744f6c939503
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
@@ -21,6 +25,7 @@
 
 
     <link rel='icon' href='favi.png' type='image/x-icon'>
+
 </head>
 
 <body>
@@ -33,6 +38,7 @@
         <p id="openPara"><strong>Enter
                 an address or a name of a place to see meteorites that have fallen within a x mile radius from the
                 location provided. The name of the meteorite, year it fell, and mass will be displayed when you search.
+                Your search history will appear at the bottom of the screen.
                 <br><br>
                 Powered using the NASA meteorite landing API, as well as the Google Maps API.
                 <br><br>
@@ -71,8 +77,26 @@
                         </button>
                     </div>
 
+        <br>
+        <div id=inputBlock>
+            <div class="row">
+                <div class="col s6 offset-s2">
+                    Search Location:
+                    <div class="row">
+                        <form class="col s12">
+                            <div class="input-field col">
+                                <textarea id="searchText" class="materialize-textarea"></textarea>
+                                <label for="searchText">Enter a location here...</label>
+                            </div>
+                    </div>
+                    </form>
                 </div>
+                <button class="btn waves-effect waves-light" type="submit" name="action" id="searchButton">Submit
+                    <i class="material-icons right"></i>
+                </button>
+
             </div>
+        </div>
 
             <table class="col s12 striped responsive" id="meteInfo">
                 <thead>
