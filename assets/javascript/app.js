@@ -39,12 +39,13 @@ function initMap() {
         $("#searchText").val("");
         
         
-
+     var timeDate = firebase.database.ServerValue.TIMESTAMP
+     var timeConv = moment.unix(timeDate).format("MM/DD/YYYY");
         
         database.ref().push({
         
             location: userLoc,
-            timeDate: firebase.database.ServerValue.TIMESTAMP
+            Date: timeConv,
             
             
         });
