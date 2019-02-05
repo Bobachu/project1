@@ -47,11 +47,6 @@ function initMap() {
 
     });
 
-    // function searchBtns(){
-    //     var userLoc = "";
-    //     userLoc.push(searchBtn);
-    // }
-
     var infowindow = new google.maps.InfoWindow();
 
     var marker, i;
