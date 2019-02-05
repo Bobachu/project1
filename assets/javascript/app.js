@@ -23,6 +23,10 @@ $("#map").toggle(false);
 
 $("#meteInfo").toggle(false);
 
+$("#openPara").toggle(true);
+
+$("#searchPara").toggle(false);
+
 // Initialize and show map in HTML
 // var marker;
 
@@ -43,6 +47,10 @@ function initMap() {
         console.log(userLoc);
 
         $("#meteInfo").toggle(true);
+
+        $("#openPara").toggle(false);
+
+        $("#searchPara").toggle(true);
        
         // searchBtns();
         geocodeAddress(geocoder, map);
@@ -63,7 +71,11 @@ function initMap() {
         console.log(userLoc);
 
         $("#meteInfo").toggle(true);
-       
+
+        $("#openPara").toggle(false);
+
+        $("#searchPara").toggle(true);
+
         // searchBtns();
         geocodeAddress(geocoder, map);
         $("#locationInput").val("");

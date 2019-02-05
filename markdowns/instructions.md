@@ -11,6 +11,7 @@
 * BootStrap or another alt. CSS Framework
 * **Must** be deployed to GitHub
 * **Must** have **User Input Validation**
+* Utilize Firebase for **Persistent Data Storage**
 
 > **Make sure your API key works over a secured connection**
 
@@ -23,7 +24,6 @@
 * Well documented API's
 
 #### Nice to Have
-* Utilize Firebase for **Persistent Data Storage**
 * Mobile Responsive
 
 
