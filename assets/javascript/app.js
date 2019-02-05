@@ -156,28 +156,6 @@ function setMapOnAll(map) {
     clearMarkers();
     allMarkers = [];
   }
-  
-database.ref().on("child_added", function (childSnapshot) {
-    console.log(childSnapshot.val());
-
-    // Store everything into a variable.
-    var metLoc = childSnapshot.val().locationInput;
-    var timeconv = childSnapshot.val().name;
-
-
-    console.log(metLoc);
-    console.log(timeconv);
-
-    // Create the new row
-    var newRow = $("<tr>").append(
-        $("<td>").text(metLoc),
-        $("<td>").text(timeconv),
-
-    );
-
-    // Append the new row to the table
-    $("#searchTable > tbody").append(newRow);
-});
 // HOME PAGE //
 
 // Paragraph On - Home
