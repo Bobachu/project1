@@ -33,8 +33,13 @@ h1 {
     border-radius: 10px;
 }
 
+h6 {
+    text-align: center;
+}
+
 #meteInfo {
     margin-bottom: 50px;
+    margin-top: 50px;
 }
 
 #inputBlock {
