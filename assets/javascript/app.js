@@ -40,10 +40,9 @@ function initMap() {
         
         
 
-        var timeDate = moment("/Date(1365715800000)/").format("MM/DD/YYYY");
         
         database.ref().push({
-            
+        
             location: userLoc,
             timeDate: firebase.database.ServerValue.TIMESTAMP
             
