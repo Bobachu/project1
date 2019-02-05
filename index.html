@@ -20,53 +20,62 @@
     <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> bf34f4f97d5dbc3cdf9b40aff134744f6c939503
 
     <link rel='icon' href='favi.png' type='image/x-icon'>
+
 </head>
 
 <body>
 
     <div class="container">
-        <a href="#""><h1>Meteorite Visitation</h1></a>
-            
+        <a href="#">
+            <h1>Meteorite Visitation</h1>
+        </a>
+
         <br>
 
         <p id=" openPara"><strong>Enter
                 an address or a name of a place to see meteorites that have fallen within a x mile radius from the
                 location provided. The name of the meteorite, year it fell, and mass will be displayed when you search.
+                Your search history will appear at the bottom of the screen.
                 <br><br>
                 Powered using the NASA meteorite landing API, as well as the Google Maps API.
                 <br><br>
                 Click the title of the page to return to the beginning!</strong>
-            </p>
-            <!--later use auto complete for city/state?  -->
+        </p>
+        <!--later use auto complete for city/state?  -->
 
-            <br>
-            <div id=inputBlock>
-                <div class="row">
-                    <div class="col s6 offset-s2">
-                        Search Location:
-                        <div class="row">
-                            <form class="col s12">
-                                <div class="input-field col">
-                                    <textarea id="searchText" class="materialize-textarea"></textarea>
-                                    <label for="searchText">Enter a location here...</label>
-                                </div>
-                        </div>
-                        </form>
+        <br>
+        <div id=inputBlock>
+            <div class="row">
+                <div class="col s6 offset-s2">
+                    Search Location:
+                    <div class="row">
+                        <form class="col s12">
+                            <div class="input-field col">
+                                <textarea id="searchText" class="materialize-textarea"></textarea>
+                                <label for="searchText">Enter a location here...</label>
+                            </div>
                     </div>
-                    <button class="btn waves-effect waves-light" type="submit" name="action" id="searchButton">Submit
-                        <i class="material-icons right"></i>
-                    </button>
-
+                    </form>
                 </div>
+                <button class="btn waves-effect waves-light" type="submit" name="action" id="searchButton">Submit
+                    <i class="material-icons right"></i>
+                </button>
+
             </div>
+        </div>
 
 
-            <div id="map" class="col s8"></div>
+        <div id="map" class="col s8"></div>
 
-            <!-- table goes here under the map -->
+        <!-- table goes here under the map -->
 
+<<<<<<< HEAD
             <table class="col s12 striped responsive">
                 <thead>
                     <tr>
@@ -95,6 +104,24 @@
                 </tbody>
             </table>
             <!-- table goes here under the map -->
+=======
+        <table id="searchTable" class="col s12 striped responsive">
+            <thead>
+                <tr>
+                    <th>Search Date</th>
+                    <th>Location</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>PH1</td>
+                    <td>PH2</td>
+                </tr>
+            </tbody>
+        </table>
+
+>>>>>>> bf34f4f97d5dbc3cdf9b40aff134744f6c939503
     </div>
 
 

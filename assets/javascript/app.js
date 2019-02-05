@@ -60,11 +60,46 @@ function initMap() {
 
     var marker, i;
 
-    for (i = 0; i < meteoriteLoc.length; i++) {
-        marker = new google.maps.Marker({
-            position: new google.maps.LatLng(meteoriteLoc[i][1], meteoriteLoc[i][2]),
-            map: map,
-            animation: google.maps.Animation.DROP,
+        
+       
+    $.ajax({
+        url: nasaURL,
+        type: "GET",
+        data: {
+            "$limit": 25,
+            "$$app_token": "uPRgN0kLB8vEkkQsOGe7M2weG"
+        }
+    })
+
+        .then(function (response) {
+            $("#searchResults").text(JSON.stringify(response));
+
+            var infowindow = new google.maps.InfoWindow();
+
+            var marker, i;
+
+            for (i = 0; i < response.length; i++) {
+                marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(response[i].reclat, response[i].reclong),
+                    map: map,
+                    animation: google.maps.Animation.DROP,
+                });
+
+                google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                    return function () {
+                        infowindow.setContent(response[i][0]);
+                        infowindow.open(map, marker);
+                    }
+                })(marker, i));
+            }
+
+            $(".name").html("Name: " + name);
+            // $(".yearFell").html("Meteor Fell: " + year);
+            $(".mass").html("Mass (in grams): " + mass);
+
+            console.log("Lat: " + lat);
+            console.log("Long: " + long);
+            console.log(response);
         });
 
         google.maps.event.addListener(marker, 'click', (function (marker, i) {
@@ -92,6 +127,28 @@ function geocodeAddress(geocoder, resultsMap) {
         }
     });
 }
+
+database.ref().on("child_added", function (childSnapshot) {
+    console.log(childSnapshot.val());
+
+    // Store everything into a variable.
+    var metLoc = childSnapshot.val().locationInput;
+    var timeconv = childSnapshot.val().name;
+
+
+    console.log(metLoc);
+    console.log(timeconv);
+
+    // Create the new row
+    var newRow = $("<tr>").append(
+        $("<td>").text(metLoc),
+        $("<td>").text(timeconv),
+
+    );
+
+    // Append the new row to the table
+    $("#searchTable > tbody").append(newRow);
+});
 // HOME PAGE //
 
 // Paragraph On - Home
