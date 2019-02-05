@@ -37,20 +37,20 @@ function initMap() {
         console.log(userLoc);
         geocodeAddress(geocoder, map);
         $("#searchText").val("");
-        
-      
-     var timeDate = firebase.database.ServerValue.TIMESTAMP
-     var timeConv = moment(timeDate).format("MM/DD/YYYY");
-     console.log(timeConv);
-        
+
+
+        var timeDate = firebase.database.ServerValue.TIMESTAMP
+        var timeConv = moment(timeDate).format("MM/DD/YYYY");
+        console.log(timeConv);
+
         database.ref().push({
-        
+
             location: userLoc,
             Date: timeConv,
-            
-            
+
+
         });
-       
+
 
     });
 
