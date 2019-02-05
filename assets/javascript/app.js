@@ -35,15 +35,17 @@ function initMap() {
         $("#map").toggle(true);
         userLoc = $("#searchText").val().trim();
         console.log(userLoc);
-        // searchBtns();
         geocodeAddress(geocoder, map);
-        $("#locationInput").val("");
-    });
+        $("#searchText").val("");
 
-    // function searchBtns(){
-    //     var userLoc = "";
-    //     userLoc.push(searchBtn);
-    // }
+
+        database.ref().push({
+            location: userLoc,
+            dateAdded: firebase.database.ServerValue.TIMESTAMP
+        });
+       
+
+    });
 
     var infowindow = new google.maps.InfoWindow();
 
@@ -115,8 +117,8 @@ function geocodeAddress(geocoder, resultsMap) {
 // SEARCH RESULTS //
 
 
-    // .then(function (response) {
-    //     $("#searchResults").text(JSON.stringify(response));
+// .then(function (response) {
+//     $("#searchResults").text(JSON.stringify(response));
 
 var mass = "https://data.nasa.gov/resource/y77d-th95.json?mass=";
 
