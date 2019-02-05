@@ -1,6 +1,8 @@
 // $(document).ready(function (){
 // searchBtns();
 
+var nasaData = "https://data.nasa.gov/resource/y77d-th95.json";
+
 var config = {
     apiKey: "AIzaSyCGZZCH_lfY1pys2O1ZWvMLFLU2La9O31I",
     authDomain: "meteroite-visit.firebaseapp.com",
@@ -32,13 +34,37 @@ function initMap() {
     $("#searchButton").on("click", function (event) {
         event.preventDefault();
         console.log("Click works");
+
         $("#map").toggle(true);
         userLoc = $("#searchText").val().trim();
         console.log(userLoc);
+       
         // searchBtns();
         geocodeAddress(geocoder, map);
         $("#locationInput").val("");
+
+
     });
+
+    $("#searchText").on("keypress", function (event) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+
+        if(keycode == '13'){
+        event.preventDefault();
+        console.log("Enter Works");
+
+        $("#map").toggle(true);
+        userLoc = $("#searchText").val().trim();
+        console.log(userLoc);
+       
+        // searchBtns();
+        geocodeAddress(geocoder, map);
+        $("#locationInput").val("");
+
+
+    }});
+
+
 
     // function searchBtns(){
     //     var userLoc = "";
@@ -63,8 +89,18 @@ function initMap() {
             }
         })(marker, i));
     }
+    
 
-}
+    
+
+    for(var i=0; i<=nasaData.length; i++){
+        var mypos = new google.maps.LatLng(nasaData[i].lat, stops[i].long);
+        var marker = new google.maps.Marker({
+         position: mypos,
+         map: map,
+         title: nasaData[i].name
+        });
+}};
 
 function geocodeAddress(geocoder, resultsMap) {
     var address = userLoc;
@@ -81,6 +117,8 @@ function geocodeAddress(geocoder, resultsMap) {
         }
     });
 }
+
+
 // HOME PAGE //
 
 // Paragraph On - Home
@@ -130,7 +168,7 @@ $.ajax({
     url: nasaURL,
     type: "GET",
     data: {
-        "$limit": 5000,
+        "$limit": 25,
         "$$app_token": "uPRgN0kLB8vEkkQsOGe7M2weG"
     }
 })
@@ -145,6 +183,7 @@ $.ajax({
         console.log("Lat: " + lat);
         console.log("Long: " + long);
         console.log(response);
+
     });
 
 // // // // // // // // // // // // //
