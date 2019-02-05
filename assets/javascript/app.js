@@ -36,14 +36,14 @@ function initMap() {
         userLoc = $("#searchText").val().trim();
         console.log(userLoc);
         geocodeAddress(geocoder, map);
-        $("#locationInput").val("");
+        $("#searchText").val("");
 
 
         database.ref().push({
             location: userLoc,
             dateAdded: firebase.database.ServerValue.TIMESTAMP
         });
-        var geoSearch = $.getJSON()
+       
 
     });
 
