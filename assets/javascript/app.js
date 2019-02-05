@@ -72,7 +72,8 @@ function geocodeAddress(geocoder, resultsMap) {
             resultsMap.setCenter(results[0].geometry.location);
             var marker = new google.maps.Marker({
                 map: resultsMap,
-                position: results[0].geometry.location
+                position: results[0].geometry.location,
+                animation: google.maps.Animation.DROP
             });
         } else {
             alert('Geocode was not successful for the following reason: ' + status);
@@ -138,11 +139,12 @@ $.ajax({
         $("#searchResults").text(JSON.stringify(response));
 
         $(".name").html("Name: " + name);
-        $(".yearFell").html("Meteor Fell: " + year);
+        // $(".yearFell").html("Meteor Fell: " + year);
         $(".mass").html("Mass (in grams): " + mass);
 
         console.log("Lat: " + lat);
         console.log("Long: " + long);
+        console.log(response);
     });
 
 // // // // // // // // // // // // //
