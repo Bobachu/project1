@@ -110,7 +110,7 @@ function initMap() {
         })(marker, i));
     }
 
-}
+
 
 function geocodeAddress(geocoder, resultsMap) {
     var address = userLoc;
@@ -133,16 +133,16 @@ database.ref().on("child_added", function (childSnapshot) {
 
     // Store everything into a variable.
     var metLoc = childSnapshot.val().locationInput;
-    var timeconv = childSnapshot.val().name;
+    var timeConv = childSnapshot.val().name;
 
 
     console.log(metLoc);
-    console.log(timeconv);
+    console.log(timeConv);
 
     // Create the new row
     var newRow = $("<tr>").append(
         $("<td>").text(metLoc),
-        $("<td>").text(timeconv),
+        $("<td>").text(timeConv),
 
     );
 
