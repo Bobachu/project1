@@ -20,6 +20,9 @@ var userLoc = "";
 var meteoriteLoc = [];
 
 $("#map").toggle(false);
+
+$("#meteInfo").toggle(false);
+
 // Initialize and show map in HTML
 // var marker;
 
@@ -38,6 +41,8 @@ function initMap() {
         $("#map").toggle(true);
         userLoc = $("#searchText").val().trim();
         console.log(userLoc);
+
+        $("#meteInfo").toggle(true);
        
         // searchBtns();
         geocodeAddress(geocoder, map);
@@ -56,6 +61,8 @@ function initMap() {
         $("#map").toggle(true);
         userLoc = $("#searchText").val().trim();
         console.log(userLoc);
+
+        $("#meteInfo").toggle(true);
        
         // searchBtns();
         geocodeAddress(geocoder, map);
@@ -119,14 +126,7 @@ function initMap() {
 
     
 
-    for(var i=0; i<=nasaData.length; i++){
-        var mypos = new google.maps.LatLng(nasaData[i].lat, stops[i].long);
-        var marker = new google.maps.Marker({
-         position: mypos,
-         map: map,
-         title: nasaData[i].name
-        });
-}};
+    };
 
 function geocodeAddress(geocoder, resultsMap) {
     var address = userLoc;
