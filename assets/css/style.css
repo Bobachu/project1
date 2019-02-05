@@ -1,21 +1,33 @@
 body {
     background-image: url("../imgs/bg2.gif");
     background-repeat: repeat;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .container {
     font-size: 15pt;
     background-color: rgb(62, 49, 126);
     margin: auto;
-    padding: 10px;
+    padding: 20px;
 }
 
-p {
+p, .row {
     font-size: 15pt;
     background-color: rgb(219, 219, 219);
     margin: auto;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+h1 {
+    background-color: rgb(62, 49, 126);
+    color: rgb(219, 219, 219);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 60pt;
     text-align: center;
+    margin: auto;
     padding: 15px;
+    border-radius: 10px;
 }
 
 #inputBlock {
@@ -24,6 +36,11 @@ p {
 }
 
 #map {
+<<<<<<< HEAD
+    height: 400px;
+=======
     height: 500px;
+>>>>>>> 50c65abf0a79500331cd5117711579709bb7066f
     margin-bottom: 20px;
+    margin-top: 15px;
   }

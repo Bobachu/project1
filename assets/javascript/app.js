@@ -1,5 +1,19 @@
 // $(document).ready(function (){
 // searchBtns();
+<<<<<<< HEAD
+
+////  DATA
+var nasaURL = "https://data.nasa.gov/resource/y77d-th95.json?";
+
+var name = "https://data.nasa.gov/resource/y77d-th95.json?name=";
+
+var mass = "https://data.nasa.gov/resource/y77d-th95.json?mass=";
+
+var long = "https://data.nasa.gov/resource/y77d-th95.json?reclong=";
+
+var lat = "https://data.nasa.gov/resource/y77d-th95.json?reclat=";
+=======
+>>>>>>> 50c65abf0a79500331cd5117711579709bb7066f
 
 var config = {
     apiKey: "AIzaSyCGZZCH_lfY1pys2O1ZWvMLFLU2La9O31I",
@@ -14,8 +28,23 @@ firebase.initializeApp(config);
 var database = firebase.database();
 
 // initial variables
+<<<<<<< HEAD
+// var userLoc = "Seattle, WA";
+var meteoriteLoc = [$.ajax({
+    url: nasaURL,
+    type: "GET",
+    data: {
+        "$limit": 5000,
+        "$$app_token": "uPRgN0kLB8vEkkQsOGe7M2weG"
+    }
+}).done(function(data) {
+
+    console.log(data);
+  })];
+=======
 var userLoc = "";
 var meteoriteLoc = [];
+>>>>>>> 50c65abf0a79500331cd5117711579709bb7066f
 
 $("#map").toggle(false);
 // Initialize and show map in HTML
@@ -25,11 +54,19 @@ function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 2,
         center: { lat: -33.92, lng: 151.25 }
+<<<<<<< HEAD
+
+
+    });
+
+    $("#submit").on("click", function (event) {
+=======
     });
 
     var geocoder = new google.maps.Geocoder();
 
     $("#searchButton").on("click", function (event) {
+>>>>>>> 50c65abf0a79500331cd5117711579709bb7066f
         event.preventDefault();
         console.log("Click works");
         $("#map").toggle(true);
@@ -38,11 +75,29 @@ function initMap() {
         // searchBtns();
         geocodeAddress(geocoder, map);
         $("#locationInput").val("");
+<<<<<<< HEAD
+
+
+
+    });
+    function searchBtns() {
+        var userLoc = "";
+        userLoc.push(searchBtn);
+    }
+
+    // marker = new google.maps.Marker({
+    //     map: map,
+    //     draggable: false,
+    //     animation: google.maps.Animation.DROP,
+    //     position: { lat: -33.92, lng: 151.25 }
+    // });
+=======
     });
     // function searchBtns(){
     //     var userLoc = "";
     //     userLoc.push(searchBtn);
     // }
+>>>>>>> 50c65abf0a79500331cd5117711579709bb7066f
 
     var infowindow = new google.maps.InfoWindow();
 
@@ -79,6 +134,14 @@ function geocodeAddress(geocoder, resultsMap) {
         }
     });
 }
+<<<<<<< HEAD
+
+//
+// ======================================
+//
+
+=======
+>>>>>>> 50c65abf0a79500331cd5117711579709bb7066f
 // HOME PAGE //
 
 // Paragraph On - Home
@@ -112,11 +175,14 @@ function geocodeAddress(geocoder, resultsMap) {
 
 // SEARCH RESULTS //
 
-////  DATA
-var nasaURL = "https://data.nasa.gov/resource/y77d-th95.json?";
 
-var name = "https://data.nasa.gov/resource/y77d-th95.json?name=";
+    // .then(function (response) {
+    //     $("#searchResults").text(JSON.stringify(response));
 
+<<<<<<< HEAD
+    //     // Meteorites that are nearby will have their information toggled on pins on Google Maps
+    //     // ------------- If not the information will be populated in a container beneath the search bar & map
+=======
 var mass = "https://data.nasa.gov/resource/y77d-th95.json?mass=";
 
 var long = "https://data.nasa.gov/resource/y77d-th95.json?reclong=";
@@ -148,39 +214,24 @@ $.ajax({
 // // // // // // // // // // // // //
 
 // Meterorite Landings within 'x' mile radius of the 'lag/long' or 'geolocation' of the place/address.
+>>>>>>> 50c65abf0a79500331cd5117711579709bb7066f
 
-// Meteorites that are nearby will have their information toggled on pins on Google Maps
-// ------------- If not the information will be populated in a container beneath the search bar & map
+    //     // 1. Name of Meteorite
+    //     $(".name").html("Name: " + name);
 
-// 1. Name of Meteorite
+    //     // 2. Year fell Data
+    //     $(".yearFell").html("Meteor Fell: " + year);
 
+    //     // 3. Mass Data
+    //     $(".mass").html("Mass (in grams): " + mass);
 
-// 2. Year fell Data
-
-
-// 3. Mass Data
-
-
-//
-// ======================================
-//
-
-// TOGGLE MAP ON/OF //
-
-// Map Off - Home page
-
-// Map On - After searching
+    //     // Meterorite Landings within 'x' mile radius of the 'lag/long' or 'geolocation' of the place/address.
+    //     console.log("Lat: " + lat);
+    //     console.log("Long: " + long);
+    // });
 
 //
 // ======================================
 //
 
-// SAVE SEARCHES //
-
-// Allow users to save their searches in the side navbar (if possible on front end)
-// Searches are saved in Firebase....
-
-// Side Navbar toggle off
-
-// Side Navbar toggle on
 // });
