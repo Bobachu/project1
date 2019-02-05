@@ -1,3 +1,6 @@
+// $(document).ready(function (){
+// searchBtns();
+
 var config = {
     apiKey: "AIzaSyCGZZCH_lfY1pys2O1ZWvMLFLU2La9O31I",
     authDomain: "meteroite-visit.firebaseapp.com",
@@ -11,38 +14,31 @@ firebase.initializeApp(config);
 var database = firebase.database();
 
 // initial variables
-// var userLoc = "Seattle, WA";
-var meteoriteLoc = [
-    ['Bondi Beach', -33.890542, 151.274856, 4],
-    ['Coogee Beach', -33.923036, 151.259052, 5],
-    ['Cronulla Beach', -34.028249, 151.157507, 3],
-    ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
-    ['Maroubra Beach', -33.950198, 151.259302, 1]
-];
+var userLoc = "";
+var meteoriteLoc = [];
 
-
+$("#map").toggle(false);
 // Initialize and show map in HTML
 // var marker;
 
 function initMap() {
-    var geocoder = new google.maps.Geocoder();
     var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 12,
+        zoom: 2,
         center: { lat: -33.92, lng: 151.25 }
-
-
     });
 
-    //Initial Values
-    var userLoc = " ";
-    
-    
+    var geocoder = new google.maps.Geocoder();
 
     $("#searchButton").on("click", function (event) {
         event.preventDefault();
         console.log("Click works");
+        $("#map").toggle(true);
         userLoc = $("#searchText").val().trim();
         console.log(userLoc);
+       geocodeAddress(geocoder, map);
+        $("#locationInput").val("");
+        
+     
         
        
 
@@ -54,14 +50,11 @@ function initMap() {
     });
 
     
-
-
-    // marker = new google.maps.Marker({
-    //     map: map,
-    //     draggable: false,
-    //     animation: google.maps.Animation.DROP,
-    //     position: { lat: -33.92, lng: 151.25 }
-    // });
+    s
+    // function searchBtns(){
+    //     var userLoc = "";
+    //     userLoc.push(searchBtn);
+    // }
 
     var infowindow = new google.maps.InfoWindow();
 
@@ -149,7 +142,7 @@ $.ajax({
     type: "GET",
     data: {
         "$limit": 5000,
-        "$$app_token": "IP2uCeskAQKyGZG9LCQccVqoQbZSCqmzUli7mNl6"
+        "$$app_token": "uPRgN0kLB8vEkkQsOGe7M2weG"
     }
 })
 
