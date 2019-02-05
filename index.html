@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    
     <title>Fallen Meteorites</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -28,103 +27,78 @@
 <body>
 
     <div class="container">
-        <a href="#""><h1>Fallen Meteorites</h1></a>
+        <a href="#"><h1>Fallen Meteorites</h1></a>
             
         <br>
 
         <p id="openPara"><strong>Enter
-                an address or a name of a place to see meteorites that have fallen within a x mile radius from the
-                location provided. The name of the meteorite, year it fell, and mass will be displayed when you search.
-                Your search history will appear at the bottom of the screen.
+            an address or a name of a place to see meteorites that have fallen within a x mile radius from the
+            location provided. The name of the meteorite, year it fell, and mass will be displayed when you search.
+            Your search history will appear at the bottom of the screen.
+            <br><br>
+            Powered using the NASA meteorite landing API, as well as the Google Maps API.
+            <br><br>
+            Click the title of the page to return to the beginning!</strong>
+        </p>
+        <p id="searchPara"><strong>Powered using the NASA meteorite landing API, as well as the Google Maps API.
                 <br><br>
-                Powered using the NASA meteorite landing API, as well as the Google Maps API.
+                Click the title of the page to return to the beginning.
                 <br><br>
-                Click the title of the page to return to the beginning!</strong>
-            </p>
-
-            <p id="searchPara"><strong>Powered using the NASA meteorite landing API, as well as the Google Maps API.
-                    <br><br>
-                    Click the title of the page to return to the beginning.
-                    <br><br>
-                    See your search results below!</strong></p>
-            <!--later use auto complete for city/state?  -->
-
-            <br>
-
-            <div id="map" class="col s8"></div>
-
-            <div id=inputBlock>
-                <div class="row">
-                    <div class="col s6 offset-s2">
-                            Location:
-                        <div class="row">
-                            <form class="col s10">
-                                <div class="input-field col">
-                                    <textarea id="searchText" class="materialize-textarea"></textarea>
-                                    <label for="locationInput">Enter a location here...</label>
-                                </div>
-                        </div>
-                        </form>
-                    </div>
-                    <div class="col">
-                        <div class="row"></div>
-                        <div class="row"></div>
-                        <button class="btn waves-effect waves-light" type="submit" name="action" id="searchButton">Submit
-                            <i class="material-icons right"></i>
-                        </button>
-                    </div>
-
+                See your search results below!</strong></p>
+        <!--later use auto complete for city/state?  -->
         <br>
+        <div id="map" class="col s8"></div>
+
         <div id=inputBlock>
             <div class="row">
                 <div class="col s6 offset-s2">
-                    Search Location:
+                        Location:
                     <div class="row">
-                        <form class="col s12">
+                        <form class="col s10">
                             <div class="input-field col">
                                 <textarea id="searchText" class="materialize-textarea"></textarea>
-                                <label for="searchText">Enter a location here...</label>
+                                <label for="locationInput">Enter a location here...</label>
                             </div>
                     </div>
                     </form>
+                <div class="col">
+                    <div class="row"></div>
+                    <div class="row"></div>
+                    <button class="btn waves-effect waves-light" type="submit" name="action" id="searchButton">Submit
+                        <i class="material-icons right"></i>
+                    </button>
                 </div>
-                <button class="btn waves-effect waves-light" type="submit" name="action" id="searchButton">Submit
-                    <i class="material-icons right"></i>
-                </button>
-
-            </div>
-        </div>
-
-            <table class="col s12 striped responsive" id="meteInfo">
-                <thead>
-                    <tr>
-                        <th>Location</th>
-                        <th>Item Name</th>
-                        <th>Item Price</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <tr>
-                        <td>Alvin</td>
-                        <td>Eclair</td>
-                        <td>$0.87</td>
-                    </tr>
-                    <tr>
-                        <td>Alan</td>
-                        <td>Jellybean</td>
-                        <td>$3.76</td>
-                    </tr>
-                    <tr>
-                        <td>Jonathan</td>
-                        <td>Lollipop</td>
-                        <td>$7.00</td>
-                    </tr>
-                </tbody>
-            </table>
-            <!-- table goes here under the map -->
-
     </div>
+
+        <table class="col s12 striped responsive" id="meteInfo">
+            <thead>
+                <tr>
+                    <th>Location</th>
+                    <th>Item Name</th>
+                    <th>Item Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Alvin</td>
+                    <td>Eclair</td>
+                    <td>$0.87</td>
+                </tr>
+                <tr>
+                    <td>Alan</td>
+                    <td>Jellybean</td>
+                    <td>$3.76</td>
+                </tr>
+                <tr>
+                    <td>Jonathan</td>
+                    <td>Lollipop</td>
+                    <td>$7.00</td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- table goes here under the map -->
+</div>
+
 
 
     <script src="assets/javascript/app.js"></script>

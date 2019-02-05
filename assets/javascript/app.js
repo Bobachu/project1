@@ -1,8 +1,6 @@
 // $(document).ready(function (){
 // searchBtns();
 
-var nasaData = "https://data.nasa.gov/resource/y77d-th95.json";
-
 var config = {
     apiKey: "AIzaSyCGZZCH_lfY1pys2O1ZWvMLFLU2La9O31I",
     authDomain: "meteroite-visit.firebaseapp.com",
@@ -41,7 +39,6 @@ function initMap() {
     $("#searchButton").on("click", function (event) {
         event.preventDefault();
         console.log("Click works");
-
         $("#map").toggle(true);
         userLoc = $("#searchText").val().trim();
         console.log(userLoc);
@@ -54,17 +51,16 @@ function initMap() {
        
         // searchBtns();
         geocodeAddress(geocoder, map);
-        $("#locationInput").val("");
+        $("#searchText").val("");
+
+        
 
 
-    });
+        var timeDate = firebase.database.ServerValue.TIMESTAMP
+        var timeConv = moment(timeDate).format("MM/DD/YYYY");
+        console.log(timeConv);
 
-    $("#searchText").on("keypress", function (event) {
-        var keycode = (event.keyCode ? event.keyCode : event.which);
-
-        if(keycode == '13'){
-        event.preventDefault();
-        console.log("Enter Works");
+        database.ref().push({
 
         $("#map").toggle(true);
         userLoc = $("#searchText").val().trim();
@@ -79,22 +75,20 @@ function initMap() {
         // searchBtns();
         geocodeAddress(geocoder, map);
         $("#locationInput").val("");
-
-
-    }});
-
-
-
-    // function searchBtns(){
-    //     var userLoc = "";
-    //     userLoc.push(searchBtn);
-    // }
-
-
-        database.ref().push({
             location: userLoc,
-            dateAdded: firebase.database.ServerValue.TIMESTAMP
+            Date: timeConv,
+
+
         });
+
+
+    });
+
+    var infowindow = new google.maps.InfoWindow();
+
+    var marker, i;
+
+        
        
     $.ajax({
         url: nasaURL,
@@ -136,10 +130,14 @@ function initMap() {
             console.log(response);
         });
 
-    
-
+        google.maps.event.addListener(marker, 'click', (function (marker, i) {
+            return function () {
+                infowindow.setContent(meteoriteLoc[i][0]);
+                infowindow.open(map, marker);
+            }
+        })(marker, i));
     };
-
+    
 function geocodeAddress(geocoder, resultsMap) {
     var address = userLoc;
     geocoder.geocode({ 'address': address }, function (results, status) {
@@ -222,6 +220,26 @@ var lat = "https://data.nasa.gov/resource/y77d-th95.json?reclat=";
 
 var nasaURL = "https://data.nasa.gov/resource/y77d-th95.json";
 
+$.ajax({
+    url: nasaURL,
+    type: "GET",
+    data: {
+        "$limit": 5000,
+        "$$app_token": "uPRgN0kLB8vEkkQsOGe7M2weG"
+    }
+})
+
+    .then(function (response) {
+        $("#searchResults").text(JSON.stringify(response));
+
+        $(".name").html("Name: " + name);
+        // $(".yearFell").html("Meteor Fell: " + year);
+        $(".mass").html("Mass (in grams): " + mass);
+
+        console.log("Lat: " + lat);
+        console.log("Long: " + long);
+        console.log(response);
+    });
 
 // // // // // // // // // // // // //
 
