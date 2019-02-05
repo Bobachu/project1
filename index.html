@@ -18,10 +18,10 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC-wb21LCS9dEviENM9iBh99us7E2K4ZI4&callback=initMap"
-        async defer></script>
+
 
     <link rel='icon' href='favi.png' type='image/x-icon'>
+
 </head>
 
 <body>
@@ -36,6 +36,7 @@
         <p id=" openPara"><strong>Enter
                 an address or a name of a place to see meteorites that have fallen within a x mile radius from the
                 location provided. The name of the meteorite, year it fell, and mass will be displayed when you search.
+                Your search history will appear at the bottom of the screen.
                 <br><br>
                 Powered using the NASA meteorite landing API, as well as the Google Maps API.
                 <br><br>
@@ -68,11 +69,30 @@
 
         <div id="map" class="col s8"></div>
 
-        <!-- table goes here under the map -->
+        <table id="searchTable" class="col s12 striped responsive">
+            <thead>
+                <tr>
+                    <th>Search Date</th>
+                    <th>Location</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>PH1</td>
+                    <td>PH2</td>
+                    <td>PH3</td>
+                    <td>PH4</td>
+                </tr>
+            </tbody>
+        </table>
+
     </div>
 
-    <script src="assets/javascript/app.js"></script>
 
+    <script src="assets/javascript/app.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC-wb21LCS9dEviENM9iBh99us7E2K4ZI4&callback=initMap"
+        async defer></script>
 
 
 </body>

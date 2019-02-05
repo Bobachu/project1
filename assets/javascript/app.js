@@ -35,34 +35,59 @@ function initMap() {
         $("#map").toggle(true);
         userLoc = $("#searchText").val().trim();
         console.log(userLoc);
-        // searchBtns();
         geocodeAddress(geocoder, map);
-        $("#locationInput").val("");
-    });
+        $("#searchText").val("");
 
-    // function searchBtns(){
-    //     var userLoc = "";
-    //     userLoc.push(searchBtn);
-    // }
 
-    var infowindow = new google.maps.InfoWindow();
-
-    var marker, i;
-
-    for (i = 0; i < meteoriteLoc.length; i++) {
-        marker = new google.maps.Marker({
-            position: new google.maps.LatLng(meteoriteLoc[i][1], meteoriteLoc[i][2]),
-            map: map,
-            animation: google.maps.Animation.DROP,
+        database.ref().push({
+            location: userLoc,
+            dateAdded: firebase.database.ServerValue.TIMESTAMP
         });
 
-        google.maps.event.addListener(marker, 'click', (function (marker, i) {
-            return function () {
-                infowindow.setContent(meteoriteLoc[i][0]);
-                infowindow.open(map, marker);
+
+    });
+
+    $.ajax({
+        url: nasaURL,
+        type: "GET",
+        data: {
+            "$limit": 25,
+            "$$app_token": "uPRgN0kLB8vEkkQsOGe7M2weG"
+        }
+    })
+
+        .then(function (response) {
+            $("#searchResults").text(JSON.stringify(response));
+
+            var infowindow = new google.maps.InfoWindow();
+
+            var marker, i;
+
+            for (i = 0; i < response.length; i++) {
+                marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(response[i].reclat, response[i].reclong),
+                    map: map,
+                    animation: google.maps.Animation.DROP,
+                });
+
+                google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                    return function () {
+                        infowindow.setContent(response[i][0]);
+                        infowindow.open(map, marker);
+                    }
+                })(marker, i));
             }
-        })(marker, i));
-    }
+
+            $(".name").html("Name: " + name);
+            // $(".yearFell").html("Meteor Fell: " + year);
+            $(".mass").html("Mass (in grams): " + mass);
+
+            console.log("Lat: " + lat);
+            console.log("Long: " + long);
+            console.log(response);
+        });
+
+
 
 }
 
@@ -81,6 +106,28 @@ function geocodeAddress(geocoder, resultsMap) {
         }
     });
 }
+
+database.ref().on("child_added", function (childSnapshot) {
+    console.log(childSnapshot.val());
+
+    // Store everything into a variable.
+    var metLoc = childSnapshot.val().location;
+    var timeconv = childSnapshot.val().name;
+
+
+    console.log(metLoc);
+    console.log(timeconv);
+
+    // Create the new row
+    var newRow = $("<tr>").append(
+        $("<td>").text(metLoc),
+        $("<td>").text(timeconv),
+
+    );
+
+    // Append the new row to the table
+    $("#searchTable > tbody").append(newRow);
+});
 // HOME PAGE //
 
 // Paragraph On - Home
@@ -115,8 +162,8 @@ function geocodeAddress(geocoder, resultsMap) {
 // SEARCH RESULTS //
 
 
-    // .then(function (response) {
-    //     $("#searchResults").text(JSON.stringify(response));
+// .then(function (response) {
+//     $("#searchResults").text(JSON.stringify(response));
 
 var mass = "https://data.nasa.gov/resource/y77d-th95.json?mass=";
 
@@ -126,26 +173,6 @@ var lat = "https://data.nasa.gov/resource/y77d-th95.json?reclat=";
 
 var nasaURL = "https://data.nasa.gov/resource/y77d-th95.json";
 
-$.ajax({
-    url: nasaURL,
-    type: "GET",
-    data: {
-        "$limit": 5000,
-        "$$app_token": "uPRgN0kLB8vEkkQsOGe7M2weG"
-    }
-})
-
-    .then(function (response) {
-        $("#searchResults").text(JSON.stringify(response));
-
-        $(".name").html("Name: " + name);
-        // $(".yearFell").html("Meteor Fell: " + year);
-        $(".mass").html("Mass (in grams): " + mass);
-
-        console.log("Lat: " + lat);
-        console.log("Long: " + long);
-        console.log(response);
-    });
 
 // // // // // // // // // // // // //
 
