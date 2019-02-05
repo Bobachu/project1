@@ -87,25 +87,6 @@ function initMap() {
             console.log(response);
         });
 
-    // var infowindow = new google.maps.InfoWindow();
-
-    // var marker, i;
-
-    // for (i = 0; i < meteoriteLoc.length; i++) {
-    //     marker = new google.maps.Marker({
-    //         position: new google.maps.LatLng(meteoriteLoc[i][1], meteoriteLoc[i][2]),
-    //         map: map,
-    //         animation: google.maps.Animation.DROP,
-    //     });
-
-    //     google.maps.event.addListener(marker, 'click', (function (marker, i) {
-    //         return function () {
-    //             infowindow.setContent(meteoriteLoc[i][0]);
-    //             infowindow.open(map, marker);
-    //         }
-    //     })(marker, i));
-    // }
-
 }
 
 function geocodeAddress(geocoder, resultsMap) {
@@ -168,45 +149,6 @@ var lat = "https://data.nasa.gov/resource/y77d-th95.json?reclat=";
 
 var nasaURL = "https://data.nasa.gov/resource/y77d-th95.json";
 
-// $.ajax({
-//     url: nasaURL,
-//     type: "GET",
-//     data: {
-//         "$limit": 5000,
-//         "$$app_token": "uPRgN0kLB8vEkkQsOGe7M2weG"
-//     }
-// })
-
-//     .then(function (response) {
-//         $("#searchResults").text(JSON.stringify(response));
-
-//         var infowindow = new google.maps.InfoWindow();
-
-//         var marker, i;
-
-//         for (i = 0; i < response.length; i++) {
-//             marker = new google.maps.Marker({
-//                 position: new google.maps.LatLng(response[i][1], response[i][2]),
-//                 map: map,
-//                 animation: google.maps.Animation.DROP,
-//             });
-
-//             google.maps.event.addListener(marker, 'click', (function (marker, i) {
-//                 return function () {
-//                     infowindow.setContent(response[i][0]);
-//                     infowindow.open(map, marker);
-//                 }
-//             })(marker, i));
-//         }
-
-//         $(".name").html("Name: " + name);
-//         // $(".yearFell").html("Meteor Fell: " + year);
-//         $(".mass").html("Mass (in grams): " + mass);
-
-//         console.log("Lat: " + lat);
-//         console.log("Long: " + long);
-//         console.log(response);
-//     });
 
 // // // // // // // // // // // // //
 
