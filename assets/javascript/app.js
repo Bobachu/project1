@@ -18,6 +18,7 @@ var database = firebase.database();
 // initial variables
 var userLoc = "";
 var meteoriteLoc = [];
+var allMarkers = [];
 
 $("#map").toggle(false);
 // Initialize and show map in HTML
@@ -38,45 +39,44 @@ function initMap() {
         $("#map").toggle(true);
         userLoc = $("#searchText").val().trim();
         console.log(userLoc);
-       
-        // searchBtns();
+
         geocodeAddress(geocoder, map);
+        deleteMarkers();
         $("#locationInput").val("");
 
+        database.ref().push({
+            location: userLoc,
+            dateAdded: firebase.database.ServerValue.TIMESTAMP
+        });
 
     });
 
     $("#searchText").on("keypress", function (event) {
         var keycode = (event.keyCode ? event.keyCode : event.which);
 
-        if(keycode == '13'){
-        event.preventDefault();
-        console.log("Enter Works");
+        if (keycode == '13') {
+            event.preventDefault();
+            console.log("Enter Works");
 
-        $("#map").toggle(true);
-        userLoc = $("#searchText").val().trim();
-        console.log(userLoc);
-       
-        // searchBtns();
-        geocodeAddress(geocoder, map);
-        $("#locationInput").val("");
+            $("#map").toggle(true);
+            userLoc = $("#searchText").val().trim();
+            console.log(userLoc);
 
+            geocodeAddress(geocoder, map);
+            deleteMarkers();
+            $("#locationInput").val("");
+            
+            database.ref().push({
+                location: userLoc,
+                dateAdded: firebase.database.ServerValue.TIMESTAMP
+            });
 
-    }});
-
-
-
-    // function searchBtns(){
-    //     var userLoc = "";
-    //     userLoc.push(searchBtn);
-    // }
+        }
+    });
 
 
-        database.ref().push({
-            location: userLoc,
-            dateAdded: firebase.database.ServerValue.TIMESTAMP
-        });
-       
+    
+
     $.ajax({
         url: nasaURL,
         type: "GET",
@@ -85,48 +85,41 @@ function initMap() {
             "$$app_token": "uPRgN0kLB8vEkkQsOGe7M2weG"
         }
     })
-    
+
         .then(function (response) {
             $("#searchResults").text(JSON.stringify(response));
-    
+
             var infowindow = new google.maps.InfoWindow();
-    
+
             var marker, i;
-    
+
             for (i = 0; i < response.length; i++) {
                 marker = new google.maps.Marker({
                     position: new google.maps.LatLng(response[i].reclat, response[i].reclong),
                     map: map,
                     animation: google.maps.Animation.DROP,
                 });
-    
+
                 google.maps.event.addListener(marker, 'click', (function (marker, i) {
                     return function () {
-                        infowindow.setContent(response[i][0]);
+                        infowindow.setContent("<p>Name: " + response[i].name + "<br />" + "Mass: " + response[i].mass + " grams" + "<br />" + "Year Fell: " + response[i].year + "</p>");
                         infowindow.open(map, marker);
                     }
                 })(marker, i));
             }
-    
+
             $(".name").html("Name: " + name);
             // $(".yearFell").html("Meteor Fell: " + year);
             $(".mass").html("Mass (in grams): " + mass);
-    
+
             console.log("Lat: " + lat);
             console.log("Long: " + long);
             console.log(response);
         });
 
-    
 
-    for(var i=0; i<=nasaData.length; i++){
-        var mypos = new google.maps.LatLng(nasaData[i].lat, stops[i].long);
-        var marker = new google.maps.Marker({
-         position: mypos,
-         map: map,
-         title: nasaData[i].name
-        });
-}};
+
+};
 
 function geocodeAddress(geocoder, resultsMap) {
     var address = userLoc;
@@ -138,13 +131,31 @@ function geocodeAddress(geocoder, resultsMap) {
                 position: results[0].geometry.location,
                 animation: google.maps.Animation.DROP
             });
+            allMarkers.push(marker)
+            console.log(allMarkers);
         } else {
             alert('Geocode was not successful for the following reason: ' + status);
         }
     });
 }
 
+// Sets the map on all markers in the array.
+function setMapOnAll(map) {
+    for (var i = 0; i < allMarkers.length; i++) {
+      allMarkers[i].setMap(map);
+    }
+  }
 
+  // Removes the markers from the map, but keeps them in the array.
+  function clearMarkers() {
+    setMapOnAll(null);
+  }
+
+  // Deletes all markers in the array by removing references to them.
+  function deleteMarkers() {
+    clearMarkers();
+    allMarkers = [];
+  }
 // HOME PAGE //
 
 // Paragraph On - Home
