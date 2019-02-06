@@ -156,6 +156,32 @@ function setMapOnAll(map) {
     clearMarkers();
     allMarkers = [];
   }
+
+//   adding row to search history table
+  database.ref().on("child_added", function(childSnapshot) {
+    console.log(childSnapshot.val());
+  
+    // Store everything into a variable.
+    var tabletimeConv = childSnapshot.val().dateAdded;
+    var tableuserLoc= childSnapshot.val().location;
+
+  
+    // Employee Info
+    console.log(tabletimeConv);
+    console.log(tableuserLoc);
+  
+  
+   
+  
+    // Create the new row
+    var newRow = $("<tr>").append(
+      $("<td>").text(tabletimeConv),
+      $("<td>").text(tableuserLoc),
+    );
+  
+    // Append the new row to the table
+    $("#searchTable > tbody").append(newRow);
+  });
 // HOME PAGE //
 
 // Paragraph On - Home
