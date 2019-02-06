@@ -16,8 +16,14 @@ var database = firebase.database();
 var userLoc = "";
 var allMarkers = [];
 
-// Hide the map on page load
+// Hide the elements on page load
 $("#map").toggle(false);
+
+$("#openPara").toggle(true);
+
+$("#searched").toggle(false);
+
+$("#searchTable").toggle(false);
 
 // Initialize and show map in HTML
 function initMap() {
@@ -36,6 +42,12 @@ function initMap() {
         // Set user search to the userLoc variable
         userLoc = $("#searchText").val().trim();
         console.log(userLoc);
+
+        $("#openPara").toggle(false);
+
+        $("#searched").toggle(true);
+
+        $("#searchTable").toggle(true);
         // Calling the geocode function to convert the user input
         geocodeAddress(geocoder, map);
         // Removing markers for new search
@@ -61,6 +73,12 @@ function initMap() {
             userLoc = $("#searchText").val().trim();
             console.log(userLoc);
 
+            $("#openPara").toggle(false);
+
+            $("#searched").toggle(true);
+
+            $("#searchTable").toggle(true);
+
             geocodeAddress(geocoder, map);
             deleteMarkers();
             $("#searchText").val("");
@@ -69,6 +87,9 @@ function initMap() {
                 location: userLoc,
                 dateAdded: firebase.database.ServerValue.TIMESTAMP
             });
+
+
+
 
         }
     });
@@ -99,7 +120,7 @@ function initMap() {
                 // Variable for the markers that will be set from NASA data
                 var marker, i;
 
-                
+
                 // Loop through the meteorite data from NASA
                 for (i = 0; i < response.length; i++) {
                     //Variable to store the lat and long of the search area
@@ -123,9 +144,6 @@ function initMap() {
                         })(marker, i));
                     }
                 }
-                console.log("Lat: " + lat);
-                console.log("Long: " + long);
-                console.log(response);
             });
         })
 
@@ -173,17 +191,12 @@ function deleteMarkers() {
 database.ref().on("child_added", function (childSnapshot) {
     console.log(childSnapshot.val());
 
-    // Store everything into variables.
     var tabletimeConv = childSnapshot.val().dateAdded;
     var tableuserLoc = childSnapshot.val().location;
+    // Store everything into a variable.
+    var dateAdded = firebase.database.ServerValue.TIMESTAMP
 
-
-    // Search Info
-    console.log(tabletimeConv);
-    console.log(tableuserLoc);
-
-
-
+    tabletimeConv = moment(dateAdded).format("MM/DD/YYYY");
 
     // Create the new row
     var newRow = $("<tr>").append(
@@ -198,5 +211,4 @@ database.ref().on("child_added", function (childSnapshot) {
 
 // URL to pull data for NASA
 var nasaURL = "https://data.nasa.gov/resource/y77d-th95.json";
-
 
