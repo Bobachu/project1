@@ -52,8 +52,7 @@ function initMap() {
 
 
         });
-
-
+        
     });
 
     var infowindow = new google.maps.InfoWindow();
@@ -128,27 +127,7 @@ function geocodeAddress(geocoder, resultsMap) {
     });
 }
 
-database.ref().on("child_added", function (childSnapshot) {
-    console.log(childSnapshot.val());
 
-    // Store everything into a variable.
-    var metLoc = childSnapshot.val().locationInput;
-    var timeConv = childSnapshot.val().name;
-
-
-    console.log(metLoc);
-    console.log(timeConv);
-
-    // Create the new row
-    var newRow = $("<tr>").append(
-        $("<td>").text(metLoc),
-        $("<td>").text(timeConv),
-
-    );
-
-    // Append the new row to the table
-    $("#searchTable > tbody").append(newRow);
-});
 // HOME PAGE //
 
 // Paragraph On - Home
