@@ -20,6 +20,12 @@ var userLoc = "";
 var allMarkers = [];
 
 $("#map").toggle(false);
+
+$("#openPara").toggle(true);
+
+$("#searched").toggle(false);
+
+$("#searchTable").toggle(false);
 // Initialize and show map in HTML
 // var marker;
 
@@ -38,6 +44,12 @@ function initMap() {
         $("#map").toggle(true);
         userLoc = $("#searchText").val().trim();
         console.log(userLoc);
+
+        $("#openPara").toggle(false);
+
+        $("#searchTable").toggle(true);
+
+        $("#searched").toggle(true);
 
         geocodeAddress(geocoder, map);
         deleteMarkers();
@@ -61,10 +73,16 @@ function initMap() {
             userLoc = $("#searchText").val().trim();
             console.log(userLoc);
 
+            $("#openPara").toggle(false);
+
+            $("#searchTable").toggle(true);
+
+            $("#searched").toggle(true);
+
             geocodeAddress(geocoder, map);
             deleteMarkers();
             $("#searchText").val("");
-            
+
             database.ref().push({
                 location: userLoc,
                 dateAdded: firebase.database.ServerValue.TIMESTAMP
@@ -74,7 +92,7 @@ function initMap() {
     });
 
 
-    
+
 
     $.ajax({
         url: nasaURL,
@@ -141,46 +159,46 @@ function geocodeAddress(geocoder, resultsMap) {
 // Sets the map on all markers in the array.
 function setMapOnAll(map) {
     for (var i = 0; i < allMarkers.length; i++) {
-      allMarkers[i].setMap(map);
+        allMarkers[i].setMap(map);
     }
-  }
+}
 
-  // Removes the markers from the map, but keeps them in the array.
-  function clearMarkers() {
+// Removes the markers from the map, but keeps them in the array.
+function clearMarkers() {
     setMapOnAll(null);
-  }
+}
 
-  // Deletes all markers in the array by removing references to them.
-  function deleteMarkers() {
+// Deletes all markers in the array by removing references to them.
+function deleteMarkers() {
     clearMarkers();
     allMarkers = [];
-  }
+}
 
 //   adding row to search history table
-  database.ref().on("child_added", function(childSnapshot) {
+database.ref().on("child_added", function (childSnapshot) {
     console.log(childSnapshot.val());
-  
+
     // Store everything into a variable.
     var tabletimeConv = childSnapshot.val().dateAdded;
-    var tableuserLoc= childSnapshot.val().location;
+    var tableuserLoc = childSnapshot.val().location;
 
-  
+
     // Employee Info
     console.log(tabletimeConv);
     console.log(tableuserLoc);
-  
-  
-   
-  
+
+
+
+
     // Create the new row
     var newRow = $("<tr>").append(
-      $("<td>").text(tabletimeConv),
-      $("<td>").text(tableuserLoc),
+        $("<td>").text(tabletimeConv),
+        $("<td>").text(tableuserLoc),
     );
-  
+
     // Append the new row to the table
     $("#searchTable > tbody").append(newRow);
-  });
+});
 // HOME PAGE //
 
 // Paragraph On - Home
