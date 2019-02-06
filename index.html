@@ -29,7 +29,7 @@
 
     <div class="container">
         <a href="#" id="title">
-            <h1 >Meteorite Visitation</h1>
+            <h1>Meteorite Visitation</h1>
         </a>
 
         <br>
@@ -40,14 +40,14 @@
                 Your search history will appear at the bottom of the screen.
                 <br><br>
                 Powered using the NASA meteorite landing API, as well as the Google Maps API.
-                </strong>
+            </strong>
         </p>
 
         <p id="searched"><strong>
-            Click the title of the page to return to the beginning!<br><br>
-            
-            Search results are displayed below, feel free to run another search!</strong>
-    </p>
+                Click the title of the page to return to the beginning!<br><br>
+
+                Search results are displayed below, feel free to run another search!</strong>
+        </p>
         <!--later use auto complete for city/state?  -->
 
         <br>
@@ -67,37 +67,37 @@
                 <button class="btn waves-effect waves-light" type="submit" name="action" id="searchButton">Submit
                     <i class="material-icons right"></i>
                 </button>
-            
+
+            </div>
+
+
+            <div id="map" class="col s8"></div>
+
+            <!-- table goes here under the map -->
+
+            <table id="searchTable" class="col s12 striped responsive">
+                <thead>
+                    <tr>
+                        <th class="tabHeader">Search Date</th>
+                        <th class="tabHeader">Location</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>PH1</td>
+                        <td>PH2</td>
+                    </tr>
+                </tbody>
+            </table>
+
         </div>
 
 
-        <div id="map" class="col s8"></div>
-
-        <!-- table goes here under the map -->
-
-        <table id="searchTable" class="col s12 striped responsive">
-            <thead>
-                <tr>
-                    <th class="tabHeader">Search Date</th>
-                    <th class="tabHeader">Location</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <tr>
-                    <td>PH1</td>
-                    <td>PH2</td>
-                </tr>
-            </tbody>
-        </table>
-
-    </div>
-
-
-    <script src="assets/javascript/app.js"></script>
-    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC-wb21LCS9dEviENM9iBh99us7E2K4ZI4&callback=initMap"
-        async defer></script>
+        <script src="assets/javascript/app.js"></script>
+        <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC-wb21LCS9dEviENM9iBh99us7E2K4ZI4&callback=initMap"
+            async defer></script>
 
 
 </body>

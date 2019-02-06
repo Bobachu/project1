@@ -18,11 +18,11 @@ var allMarkers = [];
 
 // Hide the elements on page load
 $("#map").toggle(false);
-
+// Showing opening paragraph
 $("#openPara").toggle(true);
-
+// Hiding text area
 $("#searched").toggle(false);
-
+// Hiding the table of past searches
 $("#searchTable").toggle(false);
 
 // Initialize and show map in HTML
@@ -42,11 +42,11 @@ function initMap() {
         // Set user search to the userLoc variable
         userLoc = $("#searchText").val().trim();
         console.log(userLoc);
-
+        // Hiding the opening paragraph
         $("#openPara").toggle(false);
-
+        // Showing the searched text area
         $("#searched").toggle(true);
-
+        // Showing the table of past searches
         $("#searchTable").toggle(true);
         // Calling the geocode function to convert the user input
         geocodeAddress(geocoder, map);
@@ -212,12 +212,10 @@ database.ref().on("child_added", function (childSnapshot) {
 // URL to pull data for NASA
 var nasaURL = "https://data.nasa.gov/resource/y77d-th95.json";
 
+// resetting the page back to the beginning without a refresh
 $("#title").on("click", function () {
     $("#map").toggle(false);
-
     $("#openPara").toggle(true);
-
     $("#searched").toggle(false);
-
     $("#searchTable").toggle(false);
 })

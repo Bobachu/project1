@@ -5,15 +5,6 @@ body {
     color: #011f27;
 }
 
-.container {
-    font-size: 15pt;
-    background-color: #3a6c68;
-    margin: auto;
-    padding: 20px;
-    border-radius: 10px;
-    margin-top: 30px;
-    margin-bottom: 30px;
-}
 
 p, .row {
     font-size: 15pt;
@@ -34,6 +25,22 @@ h1 {
     border-radius: 10px;
 }
 
+table {
+    background-color: rgb(219, 219, 219);
+    border-radius: 10px;
+    margin-top: 25px;
+}
+
+.container {
+    font-size: 15pt;
+    background-color: #3a6c68;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
 #inputBlock {
     margin: auto;
     align-content: center;
@@ -45,8 +52,3 @@ h1 {
     margin-top: 15px;
   }
 
-table {
-    background-color: rgb(219, 219, 219);
-    border-radius: 10px;
-    margin-top: 25px;
-}
