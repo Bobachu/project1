@@ -49,7 +49,7 @@ function initMap() {
 
         $("#searched").toggle(true);
 
-        $("searchTable").toggle(true);
+        $("#searchTable").toggle(true);
 
         geocodeAddress(geocoder, map);
         deleteMarkers();
@@ -72,6 +72,12 @@ function initMap() {
             $("#map").toggle(true);
             userLoc = $("#searchText").val().trim();
             console.log(userLoc);
+
+            $("#openPara").toggle(false);
+
+            $("#searched").toggle(true);
+    
+            $("#searchTable").toggle(true);
 
             geocodeAddress(geocoder, map);
             deleteMarkers();
