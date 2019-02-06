@@ -41,6 +41,10 @@ table {
     margin-bottom: 30px;
 }
 
+.tabHeader {
+    border-bottom: 1px solid black; 
+}
+
 #inputBlock {
     margin: auto;
     align-content: center;
