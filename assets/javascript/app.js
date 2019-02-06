@@ -17,7 +17,6 @@ var database = firebase.database();
 
 // initial variables
 var userLoc = "";
-var meteoriteLoc = [];
 var allMarkers = [];
 
 $("#map").toggle(false);
@@ -26,7 +25,7 @@ $("#map").toggle(false);
 
 function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 2,
+        zoom: 5,
         center: { lat: -33.92, lng: 151.25 }
     });
 
@@ -42,7 +41,7 @@ function initMap() {
 
         geocodeAddress(geocoder, map);
         deleteMarkers();
-        $("#locationInput").val("");
+        $("#searchText").val("");
 
         database.ref().push({
             location: userLoc,
@@ -64,9 +63,8 @@ function initMap() {
 
             geocodeAddress(geocoder, map);
             deleteMarkers();
-            $("#locationInput").val("");
-
-
+            $("#searchText").val("");
+            
             database.ref().push({
                 location: userLoc,
                 dateAdded: firebase.database.ServerValue.TIMESTAMP
