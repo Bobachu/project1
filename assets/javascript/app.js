@@ -205,7 +205,7 @@ database.ref().on("child_added", function (childSnapshot) {
     );
 
     // Append the new row to the table
-    $("#searchTable > tbody").append(newRow);
+    $("#searchTable > table > tbody").append(newRow);
 });
 
 
@@ -218,4 +218,9 @@ $("#title").on("click", function () {
     $("#openPara").toggle(true);
     $("#searched").toggle(false);
     $("#searchTable").toggle(false);
+})
+
+$("#clear").on("click", function () {
+    database.ref().remove();
+    $("#table-body").empty();
 })

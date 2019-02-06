@@ -45,6 +45,14 @@ table {
     border-bottom: 1px solid black; 
 }
 
+.card-panel {
+    background-color: #3a6c68;;
+    padding: none;
+    border: none;
+    box-shadow: none;
+    margin: none;
+}
+
 #inputBlock {
     margin: auto;
     align-content: center;
@@ -55,4 +63,4 @@ table {
     margin-bottom: 20px;
     margin-top: 15px;
   }
-
+  
