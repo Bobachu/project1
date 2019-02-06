@@ -63,8 +63,14 @@ function initMap() {
 
             geocodeAddress(geocoder, map);
             deleteMarkers();
+<<<<<<< HEAD
+            $("#locationInput").val("");
+
+
+=======
             $("#searchText").val("");
             
+>>>>>>> a9ec17e431d003eb8f9423cde48068606b673265
             database.ref().push({
                 location: userLoc,
                 dateAdded: firebase.database.ServerValue.TIMESTAMP
