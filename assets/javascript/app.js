@@ -1,6 +1,8 @@
 // $(document).ready(function (){
 // searchBtns();
 
+var nasaData = "https://data.nasa.gov/resource/y77d-th95.json";
+
 var config = {
     apiKey: "AIzaSyCGZZCH_lfY1pys2O1ZWvMLFLU2La9O31I",
     authDomain: "meteroite-visit.firebaseapp.com",
@@ -16,6 +18,7 @@ var database = firebase.database();
 // initial variables
 var userLoc = "";
 var meteoriteLoc = [];
+var allMarkers = [];
 
 $("#map").toggle(false);
 // Initialize and show map in HTML
@@ -32,35 +35,48 @@ function initMap() {
     $("#searchButton").on("click", function (event) {
         event.preventDefault();
         console.log("Click works");
+
         $("#map").toggle(true);
         userLoc = $("#searchText").val().trim();
         console.log(userLoc);
+
         geocodeAddress(geocoder, map);
-        $("#searchText").val("");
-
-        
-
-
-        var timeDate = firebase.database.ServerValue.TIMESTAMP
-        var timeConv = moment(timeDate).format("MM/DD/YYYY");
-        console.log(timeConv);
+        deleteMarkers();
+        $("#locationInput").val("");
 
         database.ref().push({
-
             location: userLoc,
-            Date: timeConv,
-
-
+            dateAdded: firebase.database.ServerValue.TIMESTAMP
         });
-        
+
     });
 
-    var infowindow = new google.maps.InfoWindow();
+    $("#searchText").on("keypress", function (event) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
 
-    var marker, i;
+        if (keycode == '13') {
+            event.preventDefault();
+            console.log("Enter Works");
 
-        
-       
+            $("#map").toggle(true);
+            userLoc = $("#searchText").val().trim();
+            console.log(userLoc);
+
+            geocodeAddress(geocoder, map);
+            deleteMarkers();
+            $("#locationInput").val("");
+            
+            database.ref().push({
+                location: userLoc,
+                dateAdded: firebase.database.ServerValue.TIMESTAMP
+            });
+
+        }
+    });
+
+
+    
+
     $.ajax({
         url: nasaURL,
         type: "GET",
@@ -86,7 +102,7 @@ function initMap() {
 
                 google.maps.event.addListener(marker, 'click', (function (marker, i) {
                     return function () {
-                        infowindow.setContent(response[i][0]);
+                        infowindow.setContent("<p>Name: " + response[i].name + "<br />" + "Mass: " + response[i].mass + " grams" + "<br />" + "Year Fell: " + response[i].year + "</p>");
                         infowindow.open(map, marker);
                     }
                 })(marker, i));
@@ -101,15 +117,9 @@ function initMap() {
             console.log(response);
         });
 
-        google.maps.event.addListener(marker, 'click', (function (marker, i) {
-            return function () {
-                infowindow.setContent(meteoriteLoc[i][0]);
-                infowindow.open(map, marker);
-            }
-        })(marker, i));
-    }
 
 
+};
 
 function geocodeAddress(geocoder, resultsMap) {
     var address = userLoc;
@@ -121,13 +131,57 @@ function geocodeAddress(geocoder, resultsMap) {
                 position: results[0].geometry.location,
                 animation: google.maps.Animation.DROP
             });
+            allMarkers.push(marker)
+            console.log(allMarkers);
         } else {
             alert('Geocode was not successful for the following reason: ' + status);
         }
     });
 }
 
+// Sets the map on all markers in the array.
+function setMapOnAll(map) {
+    for (var i = 0; i < allMarkers.length; i++) {
+      allMarkers[i].setMap(map);
+    }
+  }
 
+  // Removes the markers from the map, but keeps them in the array.
+  function clearMarkers() {
+    setMapOnAll(null);
+  }
+
+  // Deletes all markers in the array by removing references to them.
+  function deleteMarkers() {
+    clearMarkers();
+    allMarkers = [];
+  }
+
+//   adding row to search history table
+  database.ref().on("child_added", function(childSnapshot) {
+    console.log(childSnapshot.val());
+  
+    // Store everything into a variable.
+    var tabletimeConv = childSnapshot.val().dateAdded;
+    var tableuserLoc= childSnapshot.val().location;
+
+  
+    // Employee Info
+    console.log(tabletimeConv);
+    console.log(tableuserLoc);
+  
+  
+   
+  
+    // Create the new row
+    var newRow = $("<tr>").append(
+      $("<td>").text(tabletimeConv),
+      $("<td>").text(tableuserLoc),
+    );
+  
+    // Append the new row to the table
+    $("#searchTable > tbody").append(newRow);
+  });
 // HOME PAGE //
 
 // Paragraph On - Home
@@ -173,26 +227,6 @@ var lat = "https://data.nasa.gov/resource/y77d-th95.json?reclat=";
 
 var nasaURL = "https://data.nasa.gov/resource/y77d-th95.json";
 
-$.ajax({
-    url: nasaURL,
-    type: "GET",
-    data: {
-        "$limit": 5000,
-        "$$app_token": "uPRgN0kLB8vEkkQsOGe7M2weG"
-    }
-})
-
-    .then(function (response) {
-        $("#searchResults").text(JSON.stringify(response));
-
-        $(".name").html("Name: " + name);
-        // $(".yearFell").html("Meteor Fell: " + year);
-        $(".mass").html("Mass (in grams): " + mass);
-
-        console.log("Lat: " + lat);
-        console.log("Long: " + long);
-        console.log(response);
-    });
 
 // // // // // // // // // // // // //
 
