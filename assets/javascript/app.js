@@ -1,6 +1,3 @@
-// $(document).ready(function (){
-// searchBtns();
-
 var nasaData = "https://data.nasa.gov/resource/y77d-th95.json";
 
 var config = {
@@ -19,37 +16,40 @@ var database = firebase.database();
 var userLoc = "";
 var allMarkers = [];
 
+// Hide the map on page load
 $("#map").toggle(false);
-// Initialize and show map in HTML
-// var marker;
 
+// Initialize and show map in HTML
 function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 5,
-        center: { lat: -33.92, lng: 151.25 }
+        center: { lat: 39.82, lng: 98.57 }
     });
-
+    // Set geocoder variable to pass in as an argument in the gecode function
     var geocoder = new google.maps.Geocoder();
-
+    // On click listener for the search button
     $("#searchButton").on("click", function (event) {
         event.preventDefault();
         console.log("Click works");
-
+        // Show the map on click
         $("#map").toggle(true);
+        // Set user search to the userLoc variable
         userLoc = $("#searchText").val().trim();
         console.log(userLoc);
-
+        // Calling the geocode function to convert the user input
         geocodeAddress(geocoder, map);
+        // Removing markers for new search
         deleteMarkers();
+        // clearing text box
         $("#searchText").val("");
-
+        // Pushing search location and date to firebase
         database.ref().push({
             location: userLoc,
             dateAdded: firebase.database.ServerValue.TIMESTAMP
         });
 
     });
-
+    // On keypress listener to allow pressing enter to start a search, same content as click listener
     $("#searchText").on("keypress", function (event) {
         var keycode = (event.keyCode ? event.keyCode : event.which);
 
@@ -64,7 +64,7 @@ function initMap() {
             geocodeAddress(geocoder, map);
             deleteMarkers();
             $("#searchText").val("");
-            
+
             database.ref().push({
                 location: userLoc,
                 dateAdded: firebase.database.ServerValue.TIMESTAMP
@@ -74,52 +74,65 @@ function initMap() {
     });
 
 
-    
 
+    // Call to NASA to get the meteorite data
     $.ajax({
         url: nasaURL,
         type: "GET",
         data: {
-            "$limit": 25,
+            "$limit": 5000,
             "$$app_token": "uPRgN0kLB8vEkkQsOGe7M2weG"
         }
     })
 
         .then(function (response) {
-            $("#searchResults").text(JSON.stringify(response));
+            // Adding bounds listener to the map to only place pins in the search bounds
+            google.maps.event.addListener(map, 'bounds_changed', function () {
+                var bounds = map.getBounds();
+                if (!bounds) {
+                    return;
+                }
 
-            var infowindow = new google.maps.InfoWindow();
+                //Variable for the info window that appears on click of the markers
+                var infowindow = new google.maps.InfoWindow();
 
-            var marker, i;
+                // Variable for the markers that will be set from NASA data
+                var marker, i;
 
-            for (i = 0; i < response.length; i++) {
-                marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(response[i].reclat, response[i].reclong),
-                    map: map,
-                    animation: google.maps.Animation.DROP,
-                });
+                
+                // Loop through the meteorite data from NASA
+                for (i = 0; i < response.length; i++) {
+                    //Variable to store the lat and long of the search area
+                    var myLatLng = new google.maps.LatLng(response[i].reclat, response[i].reclong)
 
-                google.maps.event.addListener(marker, 'click', (function (marker, i) {
-                    return function () {
-                        infowindow.setContent("<p>Name: " + response[i].name + "<br />" + "Mass: " + response[i].mass + " grams" + "<br />" + "Year Fell: " + response[i].year + "</p>");
-                        infowindow.open(map, marker);
+                    // If within the bounds set by myLatLng variable..
+                    if (bounds.contains(myLatLng)) {
+                        // Place markers for meteorite falls
+                        marker = new google.maps.Marker({
+                            position: myLatLng,
+                            map: map,
+                            icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+                        });
+                        // Click listener for the meteorite markers
+                        google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                            return function () {
+                                // Setting the content of the info box
+                                infowindow.setContent("<p>Name: " + response[i].name + "<br />" + "Mass: " + response[i].mass + " grams" + "<br />" + "Year Fell: " + response[i].year + "</p>");
+                                infowindow.open(map, marker);
+                            }
+                        })(marker, i));
                     }
-                })(marker, i));
-            }
-
-            $(".name").html("Name: " + name);
-            // $(".yearFell").html("Meteor Fell: " + year);
-            $(".mass").html("Mass (in grams): " + mass);
-
-            console.log("Lat: " + lat);
-            console.log("Long: " + long);
-            console.log(response);
-        });
-
+                }
+                console.log("Lat: " + lat);
+                console.log("Long: " + long);
+                console.log(response);
+            });
+        })
 
 
 };
 
+// Function to use the Google geocode api to convert user input into map location
 function geocodeAddress(geocoder, resultsMap) {
     var address = userLoc;
     geocoder.geocode({ 'address': address }, function (results, status) {
@@ -141,112 +154,49 @@ function geocodeAddress(geocoder, resultsMap) {
 // Sets the map on all markers in the array.
 function setMapOnAll(map) {
     for (var i = 0; i < allMarkers.length; i++) {
-      allMarkers[i].setMap(map);
+        allMarkers[i].setMap(map);
     }
-  }
+}
 
-  // Removes the markers from the map, but keeps them in the array.
-  function clearMarkers() {
+// Removes the markers from the map, but keeps them in the array.
+function clearMarkers() {
     setMapOnAll(null);
-  }
+}
 
-  // Deletes all markers in the array by removing references to them.
-  function deleteMarkers() {
+// Deletes all markers in the array by removing references to them.
+function deleteMarkers() {
     clearMarkers();
     allMarkers = [];
-  }
+}
 
 //   adding row to search history table
-  database.ref().on("child_added", function(childSnapshot) {
+database.ref().on("child_added", function (childSnapshot) {
     console.log(childSnapshot.val());
-  
-    // Store everything into a variable.
-    var tabletimeConv = childSnapshot.val().dateAdded;
-    var tableuserLoc= childSnapshot.val().location;
 
-  
-    // Employee Info
+    // Store everything into variables.
+    var tabletimeConv = childSnapshot.val().dateAdded;
+    var tableuserLoc = childSnapshot.val().location;
+
+
+    // Search Info
     console.log(tabletimeConv);
     console.log(tableuserLoc);
-  
-  
-   
-  
+
+
+
+
     // Create the new row
     var newRow = $("<tr>").append(
-      $("<td>").text(tabletimeConv),
-      $("<td>").text(tableuserLoc),
+        $("<td>").text(tabletimeConv),
+        $("<td>").text(tableuserLoc),
     );
-  
+
     // Append the new row to the table
     $("#searchTable > tbody").append(newRow);
-  });
-// HOME PAGE //
-
-// Paragraph On - Home
+});
 
 
-// Paragraph Off - After Searching
-
-// $("p").toggle(1000, function()){
-//     console.log("toggle paragraph");
-// }
-
-
-//
-// ======================================
-//
-
-// SEARCH BAR & BUTTON //
-
-// User types in the name of a place that they would like to pull up, or an address.
-
-
-// User clicks on the search button
-
-
-// var searchResult = $("#searchText").val();
-// Here we grab the text from the input box
-
-//
-// ======================================
-//
-
-// SEARCH RESULTS //
-
-
-// .then(function (response) {
-//     $("#searchResults").text(JSON.stringify(response));
-
-var mass = "https://data.nasa.gov/resource/y77d-th95.json?mass=";
-
-var long = "https://data.nasa.gov/resource/y77d-th95.json?reclong=";
-
-var lat = "https://data.nasa.gov/resource/y77d-th95.json?reclat=";
-
+// URL to pull data for NASA
 var nasaURL = "https://data.nasa.gov/resource/y77d-th95.json";
 
 
-// // // // // // // // // // // // //
-
-// Meterorite Landings within 'x' mile radius of the 'lag/long' or 'geolocation' of the place/address.
-
-    //     // 1. Name of Meteorite
-    //     $(".name").html("Name: " + name);
-
-    //     // 2. Year fell Data
-    //     $(".yearFell").html("Meteor Fell: " + year);
-
-    //     // 3. Mass Data
-    //     $(".mass").html("Mass (in grams): " + mass);
-
-    //     // Meterorite Landings within 'x' mile radius of the 'lag/long' or 'geolocation' of the place/address.
-    //     console.log("Lat: " + lat);
-    //     console.log("Long: " + long);
-    // });
-
-//
-// ======================================
-//
-
-// });
