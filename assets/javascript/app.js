@@ -212,3 +212,12 @@ database.ref().on("child_added", function (childSnapshot) {
 // URL to pull data for NASA
 var nasaURL = "https://data.nasa.gov/resource/y77d-th95.json";
 
+$("#title").on("click", function () {
+    $("#map").toggle(false);
+
+    $("#openPara").toggle(true);
+
+    $("#searched").toggle(false);
+
+    $("#searchTable").toggle(false);
+})
