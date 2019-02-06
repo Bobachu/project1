@@ -41,7 +41,7 @@ function initMap() {
 
         geocodeAddress(geocoder, map);
         deleteMarkers();
-        $("#locationInput").val("");
+        $("#searchText").val("");
 
         database.ref().push({
             location: userLoc,
@@ -63,7 +63,7 @@ function initMap() {
 
             geocodeAddress(geocoder, map);
             deleteMarkers();
-            $("#locationInput").val("");
+            $("#searchText").val("");
             
             database.ref().push({
                 location: userLoc,
