@@ -20,6 +20,12 @@ var userLoc = "";
 var allMarkers = [];
 
 $("#map").toggle(false);
+
+$("#openPara").toggle(true);
+
+$("#searched").toggle(false);
+
+$("#searchTable").toggle(false);
 // Initialize and show map in HTML
 // var marker;
 
@@ -38,6 +44,12 @@ function initMap() {
         $("#map").toggle(true);
         userLoc = $("#searchText").val().trim();
         console.log(userLoc);
+
+        $("#openPara").toggle(false);
+
+        $("#searched").toggle(true);
+
+        $("#searchTable").toggle(true);
 
         geocodeAddress(geocoder, map);
         deleteMarkers();
@@ -61,16 +73,16 @@ function initMap() {
             userLoc = $("#searchText").val().trim();
             console.log(userLoc);
 
+            $("#openPara").toggle(false);
+
+            $("#searched").toggle(true);
+    
+            $("#searchTable").toggle(true);
+
             geocodeAddress(geocoder, map);
             deleteMarkers();
-<<<<<<< HEAD
-            $("#locationInput").val("");
-
-
-=======
             $("#searchText").val("");
-            
->>>>>>> a9ec17e431d003eb8f9423cde48068606b673265
+
             database.ref().push({
                 location: userLoc,
                 dateAdded: firebase.database.ServerValue.TIMESTAMP
@@ -170,17 +182,17 @@ function deleteMarkers() {
 //   adding row to search history table
 database.ref().on("child_added", function (childSnapshot) {
     console.log(childSnapshot.val());
-    
+
     var tabletimeConv = childSnapshot.val().dateAdded;
     var tableuserLoc = childSnapshot.val().location;
     // Store everything into a variable.
     var dateAdded = firebase.database.ServerValue.TIMESTAMP
 
-    tabletimeConv =  moment(dateAdded).format("MM/DD/YYYY");
+    tabletimeConv = moment(dateAdded).format("MM/DD/YYYY");
 
-  
-    
-    
+
+
+
     //console.log(timeConv);
     // Employee Infos
     //console.log(tabletimeConv);
