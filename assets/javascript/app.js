@@ -164,7 +164,10 @@ function geocodeAddress(geocoder, resultsMap) {
             allMarkers.push(marker)
             console.log(allMarkers);
         } else {
-            alert('Geocode was not successful for the following reason: ' + status);
+            M.toast({
+                html: 'Geocode was not successful for the following reason: ' + status, 
+                classes: 'rounded'
+            })
         }
     });
 }
